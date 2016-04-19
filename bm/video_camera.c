@@ -137,11 +137,287 @@ extern volatile uint8_t g_FlexioCameraFrameBuffer[2][OV7670_FRAME_BYTES + 32];
  * Code
  ******************************************************************************/
 
+
+
+void paintXY(volatile uint8_t *buffer,uint8_t x,uint8_t y,uint8_t r,uint8_t g,uint8_t b)
+{
+	int cor = (y*160 + x)*2;
+	buffer[cor] = (b&0x1F) + (g<<5);
+	buffer[cor+1] = (g>>3) +(r<<3);
+
+/*	int cor = (y*160 + x)*2;
+	buffer[cor] = (r<<3) + (g>>3);
+	buffer[cor+1] = (g<<5) +b;*/
+
+
+}
+
+
+//char TO_ASCII[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+char *TO_ASCII[16] = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
+
+
+
+void paintLines(void)
+{
+	int i;
+	for (i=0;i<100;i++) {
+		paintXY(g_FlexioCameraFrameBuffer[0]+32,80,i,31,0,0);
+		paintXY(g_FlexioCameraFrameBuffer[1]+32,80,i,31,0,0);
+
+		paintXY(g_FlexioCameraFrameBuffer[0]+32,90,i,0,0x3F,0);
+		paintXY(g_FlexioCameraFrameBuffer[1]+32,90,i,0,0x3F,0);
+
+		paintXY(g_FlexioCameraFrameBuffer[0]+32,100,i,0,0,31);
+		paintXY(g_FlexioCameraFrameBuffer[1]+32,100,i,0,0,31);
+
+	}
+}
+
+void convertToRGB(volatile uint8_t *buffer)
+{
+	int byte;
+	uint8_t Y = 0;
+	for (byte=0;byte<OV7670_FRAME_BYTES;byte+=2)
+	{
+		Y = buffer[byte+1];
+		buffer[byte] = Y;//(Y>>3);
+		buffer[byte+1] = 0;
+
+		//buffer[byte] = (Y>>3) + (Y<<3);
+		//buffer[byte+1] = (Y>>3) + (Y<<3);
+	}
+}
+
+
+void convertToRGBTest(volatile uint8_t *buffer)
+{
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*60*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		Y = buffer[byte];
+		buffer[byte] = (Y>>3);
+		buffer[byte+1] = 0;
+
+		buffer[byte] = (Y>>3) | (Y<<5);
+		buffer[byte+1] = (Y>>3) | (Y<<3);
+
+		//buffer[byte] = (Y>>3) + (Y<<3);
+		//buffer[byte+1] = (Y>>3) + (Y<<3);
+	}
+}
+
+void convertToRGBTest2(volatile uint8_t *buffer)
+{
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*40*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		buffer[byte] = 0;
+		buffer[byte+1] = 0;
+
+		//buffer[byte] = (Y>>3) + (Y<<3);
+		//buffer[byte+1] = (Y>>3) + (Y<<3);
+	}
+}
+
+void testColorDetect(volatile uint8_t *buffer)
+{
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		uint8_t b = buffer[byte] & 0x1F;
+		uint8_t g = ((buffer[byte] & 0xE0)>>5)|((buffer[byte+1] & 0x7)<<3);
+		uint8_t r = (buffer[byte+1]) >> 3;
+
+		if ((r>16) && (g<32) & (b<16)) {
+			buffer[byte] = 0xFF;
+			buffer[byte+1] = 0xFF;
+
+		}
+	}
+}
+
+/* Not working, too slow */
+void RGB2BW_RGB(volatile uint8_t *buffer)
+{
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		uint8_t b = buffer[byte] & 0x1F;
+		uint8_t g = ((buffer[byte] & 0xE0)>>5)|((buffer[byte+1] & 0x7)<<3);
+		uint8_t r = (buffer[byte+1]) >> 3;
+
+		Y = 0.59 *g + 0.31*r + 0.11*b;
+
+		buffer[byte] = (Y&0x1F) + (Y<<5);
+		buffer[byte+1] = (Y>>3) +(Y<<3);
+	}
+}
+
+
+/* Not working, too slow */
+void RGB2BW_RGB2(volatile uint8_t *buffer)
+{
+	int byte;
+	uint16_t Y = 0;
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		uint8_t b = buffer[byte] & 0x1F;
+		uint8_t g = ((buffer[byte] & 0xE0)>>5)|((buffer[byte+1] & 0x7)<<3);
+		uint8_t r = (buffer[byte+1]) >> 3;
+
+		Y = g + r + b;
+		Y5 = Y >> 11;
+		Y6 = Y >> 10;
+
+
+		buffer[byte] = Y5 + (Y6<<5);
+		buffer[byte+1] = (Y6>>3) +(Y5<<3);
+	}
+}
+
+
+
+// True Black & White
+void convertToRGBTest3(volatile uint8_t *buffer)
+{
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		Y = buffer[byte+1];
+		//Y5 = (Y >> 3)&0x1F;
+		//Y6 = (Y >> 2)&0x3F;
+
+		Y5 = Y >> 3;
+		Y6 = Y >> 2;
+
+		//buffer[byte] = Y5 + ((Y6<<5)&0xE0);
+		//buffer[byte+1] = ((Y6>>3)&0x07) +((Y5<<3)&0xF8);
+
+
+		buffer[byte] = Y5 + (Y6<<5);
+		buffer[byte+1] = (Y6>>3) +(Y5<<3);
+
+	}
+
+
+}
+
+
+// True Black & White
+void workingConvertYUVtoBW_RGB(volatile uint8_t *buffer)
+{
+	int white = 0;
+	int black = 0;
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		Y = buffer[byte+1];
+
+		//Y -= 0x2C;
+
+		Y5 = (Y >> 3)&0x1F;
+		Y6 = (Y >> 2)&0x3F;
+
+//		if (Y>100) {
+			/*buffer[byte] = 0;
+			buffer[byte+1] =0;*/
+			black++;
+//		} else {
+			//buffer[byte] = 0xFF;
+			//buffer[byte+1] = 0xFF;
+			white++;
+			buffer[byte] = Y5 + ((Y6<<5)&0xE0);
+			buffer[byte+1] = ((Y6>>3)&0x07) +((Y5<<3)&0xF8);
+//		}
+
+		//buffer[byte] = (Y>>3) + (Y<<3);
+		//buffer[byte+1] = (Y>>3) + (Y<<3);
+	}
+
+    usb_echo("W");
+    usb_echo(TO_ASCII[(white >> 12) & 0x0F]);
+    usb_echo(TO_ASCII[(white >> 8) & 0x0F]);
+    usb_echo(TO_ASCII[(white >> 4) & 0x0F]);
+    usb_echo(TO_ASCII[white & 0x0F]);
+    usb_echo("B");
+    usb_echo(TO_ASCII[(black >> 12) & 0x0F]);
+    usb_echo(TO_ASCII[(black >> 8) & 0x0F]);
+    usb_echo(TO_ASCII[(black >> 4) & 0x0F]);
+    usb_echo(TO_ASCII[black & 0x0F]);
+    usb_echo("\r\n");
+
+}
+
+
+
 void PORTB_IRQHandler(void)
 {
     /* Clear the interrupt flag for PTB2 */
     PORT_ClearPinsInterruptFlags(PORTB, 1U << BOARD_FLEXIO_VSYNC_PIN_INDEX);
     FLEXIO_Ov7670AsynCallback();
+/*    usb_echo("*");
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][33] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][33] & 0x0F]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][32] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][32] & 0x0F]);
+    usb_echo("-");
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][35] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][35] & 0x0F]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][34] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][34] & 0x0F]);
+    usb_echo("\r\n");
+*/
+/*
+    usb_echo("*");
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19361] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19361] & 0x0F]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19360] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19360] & 0x0F]);
+    usb_echo("-");
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19363] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19363] & 0x0F]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19362] >> 4]);
+    usb_echo(TO_ASCII[g_FlexioCameraFrameBuffer[0][19362] & 0x0F]);
+    usb_echo("\r\n");
+*/
+
+
+    //convertToRGB(g_FlexioCameraFrameBuffer[0]+32);
+    //convertToRGB(g_FlexioCameraFrameBuffer[1]+32);
+    //convertToRGBTest(g_FlexioCameraFrameBuffer[0]+32);
+    //convertToRGBTest(g_FlexioCameraFrameBuffer[1]+32);
+
+    //testColorDetect(g_FlexioCameraFrameBuffer[0]+32);
+    //testColorDetect(g_FlexioCameraFrameBuffer[1]+32);
+
+    //RGB2BW_RGB2(g_FlexioCameraFrameBuffer[0]+32);
+    //RGB2BW_RGB2(g_FlexioCameraFrameBuffer[1]+32);
+
+    convertToRGBTest3(g_FlexioCameraFrameBuffer[0]+32);
+    convertToRGBTest3(g_FlexioCameraFrameBuffer[1]+32);
+
+    paintLines();
+
 }
 
 /* Prepare next transfer payload */

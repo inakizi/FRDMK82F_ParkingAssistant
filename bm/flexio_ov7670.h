@@ -65,15 +65,40 @@
 #define OV7670_CONFIGURATION                                                                                        \
     \
 {                                                                                                            \
+        .outputFormat = (ov7670_output_format_config_t *)&OV7670_FORMAT_YUV422,                                    \
+        .resolution =                                                                                               \
+            {                                                                                                       \
+                .width = OV7670_HORIZONTAL_POINTS, .heigth = OV7670_VERTICAL_POINTS,                                \
+        },                                                                                                          \
+        .frameRate = (ov7670_frame_rate_config_t *)&OV7670_25FPS_12MHZ_XCLK, .contrast = 0x30, .brightness = 0x10, \
+        .advancedConfig = NULL,                                                           \
+    \
+}
+
+//        .outputFormat = (ov7670_output_format_config_t *)&OV7670_FORMAT_RGB565,  OV7670_FORMAT_YUV422
+
+
+/*
+ * #define OV7670_CONFIGURATION                                                                                        \
+    \
+{                                                                                                            \
         .outputFormat = (ov7670_output_format_config_t *)&OV7670_FORMAT_RGB565,                                    \
         .resolution =                                                                                               \
             {                                                                                                       \
                 .width = OV7670_HORIZONTAL_POINTS, .heigth = OV7670_VERTICAL_POINTS,                                \
         },                                                                                                          \
         .frameRate = (ov7670_frame_rate_config_t *)&OV7670_25FPS_12MHZ_XCLK, .contrast = 0x30, .brightness = 0x10, \
-        .advancedConfig = &s_Ov7670CameraAdvancedConfig,                                                           \
+        .advancedConfig = &s_Ov7670CameraAdvancedConfig,
+
+        .advancedConfig = NULL,                                                           \
+
+                                                                 \
     \
 }
+ *
+ */
+
+
 
 /*******************************************************************************
  * API

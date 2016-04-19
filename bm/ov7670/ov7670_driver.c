@@ -55,6 +55,7 @@ ov7670_window_startPoint_t OV7670_WINDOW_START_POINT_QQCIF_DEFAULT = {140, 16};
 ov7670_output_format_config_t OV7670_FORMAT_RawBayerRGB = {0x01, 0x00, 0x00};
 ov7670_output_format_config_t OV7670_FORMAT_ProcessedBayerRGB = {0x05, 0x00, 0x00};
 ov7670_output_format_config_t OV7670_FORMAT_YUV422 = {0x00, 0x00, 0x00};
+//ov7670_output_format_config_t OV7670_FORMAT_YUV422 = {0x00, 0xC0, 0x00}; // IZI Test
 ov7670_output_format_config_t OV7670_FORMAT_GRB422 = {0x04, 0x00, 0x00};
 ov7670_output_format_config_t OV7670_FORMAT_RGB565 = {0x04, 0xd0, 0x00};
 ov7670_output_format_config_t OV7670_FORMAT_RGB555 = {0x04, 0xf0, 0x00};
