@@ -157,6 +157,44 @@ void paintXY(volatile uint8_t *buffer,uint8_t x,uint8_t y,uint8_t r,uint8_t g,ui
 char *TO_ASCII[16] = {"0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"};
 
 
+void paintSquare(volatile uint8_t *buffer,int startx, int starty, int width, int height, uint8_t r, uint8_t g, uint8_t b)
+{
+	int x,y;
+	for (x=startx;x<startx+width;x++)
+	{
+		for (y=starty;y<starty+height;y++)
+		{
+			paintXY(buffer,x,y,r,g,b);
+		}
+	}
+}
+
+void paintSymbols(volatile uint8_t *buffer,int left,int stop,int right,int state)
+{
+	if (left) {
+		paintSquare(buffer,60,90,8,8,0,63,0);
+	}
+	if (stop) {
+		paintSquare(buffer,80,90,8,8,31,0,0);
+	}
+	if (right) {
+		paintSquare(buffer,100,90,8,8,0,63,0);
+	}
+
+	int i,x;
+
+	for (i=0;i<15;i++)
+	{
+		x = 10+i*10;
+		if (state==i) {
+			paintSquare(buffer,x,110,6,6,0,63,0);
+		} else {
+			paintSquare(buffer,x,110,6,6,20,40,20);
+		}
+	}
+
+}
+
 
 void paintLines(void)
 {
@@ -173,6 +211,27 @@ void paintLines(void)
 
 	}
 }
+
+
+void paintLineX(volatile uint8_t *buffer,int xcor)
+{
+	int i;
+	for (i=0;i<120;i++) {
+		paintXY(buffer,xcor,i,31,0,0);
+		paintXY(buffer,xcor,i,31,0,0);
+	}
+}
+
+void paintLineY(volatile uint8_t *buffer,int ycor)
+{
+	int i;
+	for (i=0;i<160;i++) {
+		paintXY(buffer,i,ycor,31,0,0);
+		paintXY(buffer,i,ycor,31,0,0);
+	}
+}
+
+
 
 void convertToRGB(volatile uint8_t *buffer)
 {
@@ -212,7 +271,6 @@ void convertToRGBTest(volatile uint8_t *buffer)
 void convertToRGBTest2(volatile uint8_t *buffer)
 {
 	int byte;
-	uint8_t Y = 0;
 	int limit = 160*40*2;
 	for (byte=0;byte<limit;byte+=2)
 	{
@@ -227,7 +285,6 @@ void convertToRGBTest2(volatile uint8_t *buffer)
 void testColorDetect(volatile uint8_t *buffer)
 {
 	int byte;
-	uint8_t Y = 0;
 	int limit = 160*120*2;
 	for (byte=0;byte<limit;byte+=2)
 	{
@@ -288,9 +345,8 @@ void RGB2BW_RGB2(volatile uint8_t *buffer)
 }
 
 
-
-// True Black & White
-void convertToRGBTest3(volatile uint8_t *buffer)
+// Working function that convert YUV Intensity to RGB B&W Image
+void convertYUVToBW_RGB(volatile uint8_t *buffer)
 {
 	uint8_t Y5 = 0;
 	uint8_t Y6 = 0;
@@ -300,73 +356,269 @@ void convertToRGBTest3(volatile uint8_t *buffer)
 	for (byte=0;byte<limit;byte+=2)
 	{
 		Y = buffer[byte+1];
-		//Y5 = (Y >> 3)&0x1F;
-		//Y6 = (Y >> 2)&0x3F;
+		Y5 = Y >> 3;
+		Y6 = Y >> 2;
+		buffer[byte] = Y5 + (Y6<<5);
+		buffer[byte+1] = (Y6>>3) +(Y5<<3);
+	}
+}
+
+
+// This flag indicates if processed images are modified to show processing
+#define MODIFY_IMAGE
+// Change in image pixel to consider movement - for noise filtering
+#define MOVEMENT_THRESHOLD 10
+// Size of kernel for pixel belonging to object detection
+#define OBJECT_KERNEL_SIZE 2
+
+// Size of image
+#define IMAGE_X_SIZE 160
+#define IMAGE_Y_SIZE 120
+
+uint8_t gPrevImage[19200];
+
+
+
+
+
+void detectMovement(volatile uint8_t *buffer1,volatile uint8_t *buffer2)
+{
+	if ((buffer1[0]==0xAA)&&(buffer1[1]==0x55)&&(buffer1[2]==0xAA)&&(buffer1[3]==0x55)&&
+		(buffer1[38399]==0xAA)&&(buffer1[38398]==0x55)&&(buffer1[38397]==0xAA)&&(buffer1[38396]==0x55))
+	{
+		return;
+	}
+
+	int i=0;
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int byte;
+	uint8_t Y = 0;
+	int sub;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		//Y = buffer1[byte+1] - buffer2[byte+1];
+		//Y = buffer1[byte+1] - prevImage[i];// - buffer2[byte+1];
+		sub = buffer1[byte+1] - gPrevImage[i];// - buffer2[byte+1];
+		if (sub<0) {
+			Y = -sub;
+		} else {
+			Y = sub;
+		}
+		//Y = prevImage[i];// - buffer2[byte+1];
+		gPrevImage[i]=buffer1[byte+1];
+		Y5 = Y >> 3;
+		Y6 = Y >> 2;
+		buffer1[byte] = Y5 + (Y6<<5);
+		buffer1[byte+1] = (Y6>>3) +(Y5<<3);
+		i++;
+	}
+	buffer1[0]=0xAA;
+	buffer1[1]=0x55;
+	buffer1[2]=0xAA;
+	buffer1[3]=0x55;
+	buffer1[38399]=0xAA;
+	buffer1[38398]=0x55;
+	buffer1[38397]=0xAA;
+	buffer1[38396]=0x55;
+
+}
+
+
+
+void detectMovement2(volatile uint8_t *buffer1,volatile uint8_t *buffer2)
+{
+	if ((buffer1[0]==0xAA)&&(buffer1[1]==0x55)&&(buffer1[2]==0xAA)&&(buffer1[3]==0x55)&&
+		(buffer1[38399]==0xAA)&&(buffer1[38398]==0x55)&&(buffer1[38397]==0xAA)&&(buffer1[38396]==0x55))
+	{
+		return;
+	}
+
+	int i=0;
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int byte;
+	uint8_t Y = 0;
+	int sub;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		Y = buffer1[byte+1];
+		sub = buffer1[byte+1] - gPrevImage[i];// - buffer2[byte+1];
+		gPrevImage[i]=buffer1[byte+1];
+
+		if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
+		{
+			buffer1[byte] = 0;
+			buffer1[byte+1] = 0xF8;
+		} else {
+			Y5 = Y >> 3;
+			Y6 = Y >> 2;
+			buffer1[byte] = Y5 + (Y6<<5);
+			buffer1[byte+1] = (Y6>>3) +(Y5<<3);
+
+		}
+		//Y = prevImage[i];// - buffer2[byte+1];
+/*
+		Y5 = Y >> 3;
+		Y6 = Y >> 2;
+		buffer1[byte] = Y5 + (Y6<<5);
+		buffer1[byte+1] = (Y6>>3) +(Y5<<3);*/
+		i++;
+	}
+
+
+	buffer1[0]=0xAA;
+	buffer1[1]=0x55;
+	buffer1[2]=0xAA;
+	buffer1[3]=0x55;
+	buffer1[38399]=0xAA;
+	buffer1[38398]=0x55;
+	buffer1[38397]=0xAA;
+	buffer1[38396]=0x55;
+
+}
+
+
+
+
+
+void convert2RGBandSavePrevious(volatile uint8_t *buffer)
+{
+
+	int i=0;
+	uint8_t Y5 = 0;
+	uint8_t Y6 = 0;
+	int byte;
+	uint8_t Y = 0;
+	int limit = 160*120*2;
+	for (byte=0;byte<limit;byte+=2)
+	{
+		Y = buffer[byte+1];
+		gPrevImage[i]=buffer[byte+1];
 
 		Y5 = Y >> 3;
 		Y6 = Y >> 2;
-
-		//buffer[byte] = Y5 + ((Y6<<5)&0xE0);
-		//buffer[byte+1] = ((Y6>>3)&0x07) +((Y5<<3)&0xF8);
-
-
 		buffer[byte] = Y5 + (Y6<<5);
 		buffer[byte+1] = (Y6>>3) +(Y5<<3);
 
+		i++;
 	}
-
 
 }
 
 
-// True Black & White
-void workingConvertYUVtoBW_RGB(volatile uint8_t *buffer)
+
+
+// Function that locates a moving object in the camera frame
+// Inputs:
+//    buffer: Image in YUV format
+//    direction: 1 left to right -1 right to left
+// Outputs:
+//    xcor: xcoordinate of moving object if -1 means not changed or unabled to retrieve
+//    ycor: y coordinate of moving object if -1 means not changed or unabled to retrieve
+void locateMovingObject(volatile uint8_t *buffer,int direction,int *pxcor,int *pycor)
 {
-	int white = 0;
-	int black = 0;
-	uint8_t Y5 = 0;
-	uint8_t Y6 = 0;
-	int byte;
-	uint8_t Y = 0;
-	int limit = 160*120*2;
-	for (byte=0;byte<limit;byte+=2)
+	if ((buffer[0]==0xAA)&&(buffer[1]==0x55)&&(buffer[2]==0xAA)&&(buffer[3]==0x55)&&
+		(buffer[38399]==0xAA)&&(buffer[38398]==0x55)&&(buffer[38397]==0xAA)&&(buffer[38396]==0x55))
 	{
-		Y = buffer[byte+1];
-
-		//Y -= 0x2C;
-
-		Y5 = (Y >> 3)&0x1F;
-		Y6 = (Y >> 2)&0x3F;
-
-//		if (Y>100) {
-			/*buffer[byte] = 0;
-			buffer[byte+1] =0;*/
-			black++;
-//		} else {
-			//buffer[byte] = 0xFF;
-			//buffer[byte+1] = 0xFF;
-			white++;
-			buffer[byte] = Y5 + ((Y6<<5)&0xE0);
-			buffer[byte+1] = ((Y6>>3)&0x07) +((Y5<<3)&0xF8);
-//		}
-
-		//buffer[byte] = (Y>>3) + (Y<<3);
-		//buffer[byte+1] = (Y>>3) + (Y<<3);
+		*pxcor = -1;
+		*pycor = -1;
+		return;
 	}
 
-    usb_echo("W");
-    usb_echo(TO_ASCII[(white >> 12) & 0x0F]);
-    usb_echo(TO_ASCII[(white >> 8) & 0x0F]);
-    usb_echo(TO_ASCII[(white >> 4) & 0x0F]);
-    usb_echo(TO_ASCII[white & 0x0F]);
-    usb_echo("B");
-    usb_echo(TO_ASCII[(black >> 12) & 0x0F]);
-    usb_echo(TO_ASCII[(black >> 8) & 0x0F]);
-    usb_echo(TO_ASCII[(black >> 4) & 0x0F]);
-    usb_echo(TO_ASCII[black & 0x0F]);
-    usb_echo("\r\n");
+/*
+	// This flag indicates if processed images are modified to show processing
+	#define MODIFY_IMAGE
+	// Change in image pixel to consider movement - for noise filtering
+	#define MOVEMENT_THRESHOLD 20
+	// Size of kernel for pixel belonging to object detection
+	#define MIN_PROX_FOR_OBJECT 2
+*/
+
+	int index = 0;
+	int prevIndex = 0;
+	*pxcor = -1;
+	*pycor = -1;
+	int x,y;
+	int sub;
+
+	for (x=10;x<(IMAGE_X_SIZE - OBJECT_KERNEL_SIZE);x++)
+	{
+		for(y=10;y<(IMAGE_Y_SIZE - OBJECT_KERNEL_SIZE);y++)
+		{
+			prevIndex = (y*IMAGE_X_SIZE + x);
+			index = (prevIndex<<1) +1;
+			sub = buffer[index] - gPrevImage[prevIndex];
+			if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
+			{
+				//usb_echo("MY sub: %d bufferI: %d prevImageI: %d\r\n",sub,buffer[index], gPrevImage[prevIndex]);
+				usb_echo("MY sub: %d bufferI: %d prevImageI: %d\r\n",sub,index,prevIndex);
+				*pxcor = x;
+				break;
+			}
+		}
+		if (*pxcor > -1) break;
+	}
+
+	for(y=10;y<(IMAGE_Y_SIZE - OBJECT_KERNEL_SIZE);y++)
+	{
+		for (x=10;x<(IMAGE_X_SIZE - OBJECT_KERNEL_SIZE);x++)
+		{
+			prevIndex = (y*IMAGE_X_SIZE + x);
+			index = (prevIndex<<1)+1;
+			sub = buffer[index] - gPrevImage[prevIndex];
+			if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
+			{
+				usb_echo("MX");
+				*pycor = y;
+				break;
+			}
+		}
+		if (*pycor > -1) break;
+	}
+
+
+	convert2RGBandSavePrevious(buffer);
+
+	buffer[0]=0xAA;
+	buffer[1]=0x55;
+	buffer[2]=0xAA;
+	buffer[3]=0x55;
+	buffer[38399]=0xAA;
+	buffer[38398]=0x55;
+	buffer[38397]=0xAA;
+	buffer[38396]=0x55;
 
 }
+
+
+
+void callProgramWithNewImage(volatile uint8_t *buffer)
+{
+	if ((buffer[0]==0xAA)&&(buffer[1]==0x55)&&(buffer[2]==0xAA)&&(buffer[3]==0x55)&&
+		(buffer[38399]==0xAA)&&(buffer[38398]==0x55)&&(buffer[38397]==0xAA)&&(buffer[38396]==0x55))
+	{
+		return;
+	}
+
+	runParkingAssistant(buffer);
+
+
+	buffer[0]=0xAA;
+	buffer[1]=0x55;
+	buffer[2]=0xAA;
+	buffer[3]=0x55;
+	buffer[38399]=0xAA;
+	buffer[38398]=0x55;
+	buffer[38397]=0xAA;
+	buffer[38396]=0x55;
+
+}
+
+
+
 
 
 
@@ -413,10 +665,126 @@ void PORTB_IRQHandler(void)
     //RGB2BW_RGB2(g_FlexioCameraFrameBuffer[0]+32);
     //RGB2BW_RGB2(g_FlexioCameraFrameBuffer[1]+32);
 
-    convertToRGBTest3(g_FlexioCameraFrameBuffer[0]+32);
-    convertToRGBTest3(g_FlexioCameraFrameBuffer[1]+32);
+    //convertToRGBTest3(g_FlexioCameraFrameBuffer[0]+32);
+    //convertToRGBTest3(g_FlexioCameraFrameBuffer[1]+32);
 
-    paintLines();
+    // This didn't work. Images contain non converted areas
+    //convertToRGBTest3(g_FlexioCameraFrameBuffer[g_UsbDeviceVideoFlexioCamera.fullBufferIndex]+32);
+
+/*    if (g_UsbDeviceVideoFlexioCamera.fullBufferIndex==0) {
+    	convertYUVToBW_RGB(g_FlexioCameraFrameBuffer[1]+32);
+    } else {
+    	convertYUVToBW_RGB(g_FlexioCameraFrameBuffer[0]+32);
+    }
+*/
+
+
+/*    // Last Known working to detect movement
+	if (g_UsbDeviceVideoFlexioCamera.fullBufferIndex==0) {
+		detectMovement2(g_FlexioCameraFrameBuffer[1]+32,g_FlexioCameraFrameBuffer[0]+32);
+	} else {
+		detectMovement2(g_FlexioCameraFrameBuffer[0]+32,g_FlexioCameraFrameBuffer[1]+32);
+	}*/
+
+
+    int xcor,ycor;
+
+    static int prevxcor=0;
+    static int prevycor=0;
+
+    volatile uint8_t *buffer;
+	if (g_UsbDeviceVideoFlexioCamera.fullBufferIndex==0) {
+		buffer = g_FlexioCameraFrameBuffer[1]+32;
+	} else {
+		buffer = g_FlexioCameraFrameBuffer[0]+32;
+	}
+
+
+
+	callProgramWithNewImage(buffer);
+
+/*
+	locateMovingObject(buffer,0,&xcor,&ycor);
+	if (xcor>0) {
+		prevxcor = xcor;
+	}
+	if (ycor>0) {
+		prevycor = ycor;
+	}
+	paintLineX(buffer,prevxcor);
+	paintLineY(buffer,prevycor);
+
+*/
+
+
+/*
+    usb_echo(TO_ASCII[g_UsbDeviceVideoFlexioCamera.fullBufferIndex & 0x0F]);
+    if ((g_FlexioCameraFrameBuffer[0][32] == 0xCA) &&
+    	(g_FlexioCameraFrameBuffer[0][33] == 0xFE) &&
+		(g_FlexioCameraFrameBuffer[0][34] == 0xBA) &&
+		(g_FlexioCameraFrameBuffer[0][35] == 0xBE)) {
+
+    	usb_echo(" B0 SD");
+    }
+
+    if ((g_FlexioCameraFrameBuffer[0][38428] == 0xCA) &&
+    	(g_FlexioCameraFrameBuffer[0][38429] == 0xFE) &&
+		(g_FlexioCameraFrameBuffer[0][38430] == 0xBA) &&
+		(g_FlexioCameraFrameBuffer[0][38431] == 0xBE)) {
+
+    	usb_echo(" B0 FD");
+    }
+
+    if ((g_FlexioCameraFrameBuffer[1][32] == 0xCA) &&
+    	(g_FlexioCameraFrameBuffer[1][33] == 0xFE) &&
+		(g_FlexioCameraFrameBuffer[1][34] == 0xBA) &&
+		(g_FlexioCameraFrameBuffer[1][35] == 0xBE)) {
+
+    	usb_echo(" B1 SD");
+
+    }
+    if ((g_FlexioCameraFrameBuffer[1][38428] == 0xCA) &&
+    	(g_FlexioCameraFrameBuffer[1][38429] == 0xFE) &&
+		(g_FlexioCameraFrameBuffer[1][38430] == 0xBA) &&
+		(g_FlexioCameraFrameBuffer[1][38431] == 0xBE)) {
+
+    	usb_echo(" B1 FD");
+    }
+
+	usb_echo("\r\n");
+
+
+
+    if (g_UsbDeviceVideoFlexioCamera.fullBufferIndex==0) {
+    	g_FlexioCameraFrameBuffer[1][32] = 0xCA;
+    	g_FlexioCameraFrameBuffer[1][33] = 0xFE;
+    	g_FlexioCameraFrameBuffer[1][34] = 0xBA;
+    	g_FlexioCameraFrameBuffer[1][35] = 0xBE;
+
+    	g_FlexioCameraFrameBuffer[1][38428] = 0xCA;
+    	g_FlexioCameraFrameBuffer[1][38429] = 0xFE;
+    	g_FlexioCameraFrameBuffer[1][38430] = 0xBA;
+    	g_FlexioCameraFrameBuffer[1][38431] = 0xBE;
+   } else {
+    	g_FlexioCameraFrameBuffer[0][32] = 0xCA;
+    	g_FlexioCameraFrameBuffer[0][33] = 0xFE;
+    	g_FlexioCameraFrameBuffer[0][34] = 0xBA;
+    	g_FlexioCameraFrameBuffer[0][35] = 0xBE;
+
+    	g_FlexioCameraFrameBuffer[0][38428] = 0xCA;
+    	g_FlexioCameraFrameBuffer[0][38429] = 0xFE;
+    	g_FlexioCameraFrameBuffer[0][38430] = 0xBA;
+    	g_FlexioCameraFrameBuffer[0][38431] = 0xBE;
+    }
+*/
+
+
+//	paintSymbols(buffer,1,1,1,10);
+
+    usb_echo(TO_ASCII[g_UsbDeviceVideoFlexioCamera.fullBufferIndex & 0x0F]);
+	usb_echo("\r\n");
+
+    //paintLines();
 
 }
 
@@ -1408,8 +1776,11 @@ void main(void)
 
     USB_DeviceApplicationInit();
 
+    init();
+
     while (1U)
     {
+    	//run();
 #if USB_DEVICE_CONFIG_USE_TASK
 #if defined(USB_DEVICE_CONFIG_EHCI) && (USB_DEVICE_CONFIG_EHCI > 0U)
         USB_DeviceEhciTaskFunction(g_UsbDeviceVideoFlexioCamera.deviceHandle);

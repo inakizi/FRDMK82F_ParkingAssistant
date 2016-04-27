@@ -103,4 +103,12 @@ void BOARD_InitPins(void)
     vsyncPinConfig.pullSelect = kPORT_PullUp;
     vsyncPinConfig.slewRate = kPORT_SlowSlewRate;
     PORT_SetPinConfig(PORTC, 8UL, &vsyncPinConfig);
+
+
+
+
+
+
+
+
 }

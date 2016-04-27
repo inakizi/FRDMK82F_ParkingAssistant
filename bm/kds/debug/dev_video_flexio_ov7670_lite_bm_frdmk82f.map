@@ -307,6 +307,27 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 ./sources/flexio_ov7670.o
  .data.s_Ov7670CameraAdvancedConfig
                 0x0000000000000000       0x1c ./sources/flexio_ov7670.o
+ .text          0x0000000000000000        0x0 ./sources/parkingasst.o
+ .data          0x0000000000000000        0x0 ./sources/parkingasst.o
+ .bss           0x0000000000000000        0x0 ./sources/parkingasst.o
+ .text.getTimer
+                0x0000000000000000       0x18 ./sources/parkingasst.o
+ .text.timeElapsed
+                0x0000000000000000       0x38 ./sources/parkingasst.o
+ .text.delay    0x0000000000000000       0x2c ./sources/parkingasst.o
+ .text.delayT0H
+                0x0000000000000000       0x1c ./sources/parkingasst.o
+ .text.delayT1H
+                0x0000000000000000       0x2c ./sources/parkingasst.o
+ .text.presetLED
+                0x0000000000000000       0x34 ./sources/parkingasst.o
+ .text.run      0x0000000000000000       0x30 ./sources/parkingasst.o
+ .data.LEDMask.6940
+                0x0000000000000000        0x4 ./sources/parkingasst.o
+ .bss.toggle.6939
+                0x0000000000000000        0x1 ./sources/parkingasst.o
+ .bss.lastTime.6970
+                0x0000000000000000        0x4 ./sources/parkingasst.o
  .text          0x0000000000000000        0x0 ./sources/usb_device_ch9.o
  .data          0x0000000000000000        0x0 ./sources/usb_device_ch9.o
  .bss           0x0000000000000000        0x0 ./sources/usb_device_ch9.o
@@ -330,22 +351,47 @@ Discarded input sections
  .text          0x0000000000000000        0x0 ./sources/video_camera.o
  .data          0x0000000000000000        0x0 ./sources/video_camera.o
  .bss           0x0000000000000000        0x0 ./sources/video_camera.o
+ .text.paintXY  0x0000000000000000       0x60 ./sources/video_camera.o
  .data.TO_ASCII
                 0x0000000000000000       0x40 ./sources/video_camera.o
+ .text.paintSquare
+                0x0000000000000000       0x64 ./sources/video_camera.o
+ .text.paintSymbols
+                0x0000000000000000       0xdc ./sources/video_camera.o
+ .text.paintLines
+                0x0000000000000000       0xb8 ./sources/video_camera.o
+ .text.paintLineX
+                0x0000000000000000       0x5c ./sources/video_camera.o
+ .text.paintLineY
+                0x0000000000000000       0x5c ./sources/video_camera.o
  .text.convertToRGB
                 0x0000000000000000       0x4c ./sources/video_camera.o
  .text.convertToRGBTest
                 0x0000000000000000       0x90 ./sources/video_camera.o
  .text.convertToRGBTest2
-                0x0000000000000000       0x48 ./sources/video_camera.o
+                0x0000000000000000       0x44 ./sources/video_camera.o
  .text.testColorDetect
-                0x0000000000000000       0xb8 ./sources/video_camera.o
+                0x0000000000000000       0xb4 ./sources/video_camera.o
  .text.RGB2BW_RGB
                 0x0000000000000000      0x150 ./sources/video_camera.o
  .text.RGB2BW_RGB2
                 0x0000000000000000       0xd4 ./sources/video_camera.o
- .text.workingConvertYUVtoBW_RGB
-                0x0000000000000000      0x154 ./sources/video_camera.o
+ .text.convertYUVToBW_RGB
+                0x0000000000000000       0x80 ./sources/video_camera.o
+ .bss.gPrevImage
+                0x0000000000000000     0x4b00 ./sources/video_camera.o
+ .text.detectMovement
+                0x0000000000000000      0x184 ./sources/video_camera.o
+ .text.detectMovement2
+                0x0000000000000000      0x1a0 ./sources/video_camera.o
+ .text.convert2RGBandSavePrevious
+                0x0000000000000000       0xa0 ./sources/video_camera.o
+ .text.locateMovingObject
+                0x0000000000000000      0x20c ./sources/video_camera.o
+ .bss.prevycor.8589
+                0x0000000000000000        0x4 ./sources/video_camera.o
+ .bss.prevxcor.8588
+                0x0000000000000000        0x4 ./sources/video_camera.o
  .text          0x0000000000000000        0x0 ./osa/usb_osa_bm.o
  .data          0x0000000000000000        0x0 ./osa/usb_osa_bm.o
  .bss           0x0000000000000000        0x0 ./osa/usb_osa_bm.o
@@ -805,6 +851,13 @@ Discarded input sections
                 0x0000000000000000       0x1c ./drivers/fsl_i2c.o
  .rodata.__func__.7114
                 0x0000000000000000       0x1c ./drivers/fsl_i2c.o
+ .text          0x0000000000000000        0x0 ./drivers/fsl_lptmr.o
+ .data          0x0000000000000000        0x0 ./drivers/fsl_lptmr.o
+ .bss           0x0000000000000000        0x0 ./drivers/fsl_lptmr.o
+ .text.CLOCK_DisableClock
+                0x0000000000000000       0x38 ./drivers/fsl_lptmr.o
+ .text.LPTMR_Deinit
+                0x0000000000000000       0x34 ./drivers/fsl_lptmr.o
  .text          0x0000000000000000        0x0 ./drivers/fsl_lpuart.o
  .data          0x0000000000000000        0x0 ./drivers/fsl_lpuart.o
  .bss           0x0000000000000000        0x0 ./drivers/fsl_lpuart.o
@@ -1337,6 +1390,7 @@ LOAD ./startup/system_MK82F25615.o
 LOAD ./sources/ov7670/fsl_sccb_master_driver.o
 LOAD ./sources/ov7670/ov7670_driver.o
 LOAD ./sources/flexio_ov7670.o
+LOAD ./sources/parkingasst.o
 LOAD ./sources/usb_device_ch9.o
 LOAD ./sources/usb_device_descriptor.o
 LOAD ./sources/usb_device_video.o
@@ -1350,6 +1404,7 @@ LOAD ./drivers/fsl_flexio.o
 LOAD ./drivers/fsl_flexio_camera.o
 LOAD ./drivers/fsl_gpio.o
 LOAD ./drivers/fsl_i2c.o
+LOAD ./drivers/fsl_lptmr.o
 LOAD ./drivers/fsl_lpuart.o
 LOAD ./drivers/fsl_mpu.o
 LOAD ./drivers/fsl_sim.o
@@ -1397,7 +1452,7 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
  .FlashConfig   0x0000000000000400       0x10 ./startup/startup_MK82F25615.o
                 0x0000000000000410                . = ALIGN (0x4)
 
-.text           0x0000000000000410     0xbe50
+.text           0x0000000000000410     0xcfd0
                 0x0000000000000410                . = ALIGN (0x4)
  *(.text)
  .text          0x0000000000000410       0x54 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
@@ -1411,7 +1466,8 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x0000000000000534                Reserved88_IRQHandler
                 0x0000000000000534                DMA13_DMA29_DriverIRQHandler
                 0x0000000000000534                PIT0CH2_IRQHandler
-                0x0000000000000534                Reserved96_IRQHandler
+                0x0000000000000534                Reserved113_IRQHandler
+                0x0000000000000534                SPI0_DriverIRQHandler
                 0x0000000000000534                TPM1_IRQHandler
                 0x0000000000000534                Reserved106_IRQHandler
                 0x0000000000000534                LVD_LVW_IRQHandler
@@ -1432,9 +1488,8 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x0000000000000534                CMP0_IRQHandler
                 0x0000000000000534                Reserved52_IRQHandler
                 0x0000000000000534                PORTC_IRQHandler
-                0x0000000000000534                LPTMR0_LPTMR1_IRQHandler
                 0x0000000000000534                Reserved122_IRQHandler
-                0x0000000000000534                Reserved113_IRQHandler
+                0x0000000000000534                Reserved96_IRQHandler
                 0x0000000000000534                SPI1_DriverIRQHandler
                 0x0000000000000534                Reserved85_IRQHandler
                 0x0000000000000534                DMA_Error_DriverIRQHandler
@@ -1505,7 +1560,6 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x0000000000000534                DMA3_DMA19_DriverIRQHandler
                 0x0000000000000534                Reserved94_IRQHandler
                 0x0000000000000534                Reserved112_IRQHandler
-                0x0000000000000534                SPI0_DriverIRQHandler
                 0x0000000000000538                NMI_Handler
                 0x000000000000053c                HardFault_Handler
                 0x0000000000000540                SVC_Handler
@@ -1805,663 +1859,739 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x00000000000056f4       0x64 ./sources/flexio_ov7670.o
  .text.FLEXIO_Ov7670VsynInit
                 0x0000000000005758       0x4c ./sources/flexio_ov7670.o
- .text.USB_DeviceCh9GetStatus
-                0x00000000000057a4       0xe0 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9SetClearFeature
-                0x0000000000005884       0xf0 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9SetAddress
-                0x0000000000005974       0x8c ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9GetDescriptor
-                0x0000000000005a00       0x48 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9GetConfiguration
-                0x0000000000005a48       0x50 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9SetConfiguration
-                0x0000000000005a98       0x70 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9GetInterface
-                0x0000000000005b08       0x54 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9SetInterface
-                0x0000000000005b5c       0x48 ./sources/usb_device_ch9.o
- .text.USB_DeviceCh9SynchFrame
-                0x0000000000005ba4       0x5c ./sources/usb_device_ch9.o
- .text.USB_DeviceControlCallbackFeedback
-                0x0000000000005c00       0xb0 ./sources/usb_device_ch9.o
- .text.USB_DeviceControlCallback
-                0x0000000000005cb0      0x21c ./sources/usb_device_ch9.o
-                0x0000000000005cb0                USB_DeviceControlCallback
- .text.USB_DeviceControlPipeInit
-                0x0000000000005ecc       0x7c ./sources/usb_device_ch9.o
-                0x0000000000005ecc                USB_DeviceControlPipeInit
- .text.USB_DeviceGetDescriptor
-                0x0000000000005f48      0x118 ./sources/usb_device_descriptor.o
-                0x0000000000005f48                USB_DeviceGetDescriptor
- .text.USB_DeviceSetConfigure
-                0x0000000000006060       0x38 ./sources/usb_device_descriptor.o
-                0x0000000000006060                USB_DeviceSetConfigure
- .text.USB_DeviceGetConfigure
-                0x0000000000006098       0x24 ./sources/usb_device_descriptor.o
-                0x0000000000006098                USB_DeviceGetConfigure
- .text.USB_DeviceSetInterface
-                0x00000000000060bc       0x34 ./sources/usb_device_descriptor.o
-                0x00000000000060bc                USB_DeviceSetInterface
- .text.USB_DeviceGetInterface
-                0x00000000000060f0       0x2c ./sources/usb_device_descriptor.o
-                0x00000000000060f0                USB_DeviceGetInterface
  .text.NVIC_EnableIRQ
-                0x000000000000611c       0x30 ./sources/video_camera.o
- .text.NVIC_SetPriority
-                0x000000000000614c       0x54 ./sources/video_camera.o
- .text.CLOCK_SetClkOutClock
-                0x00000000000061a0       0x38 ./sources/video_camera.o
- .text.PORT_ClearPinsInterruptFlags
-                0x00000000000061d8       0x1c ./sources/video_camera.o
- .text.paintXY  0x00000000000061f4       0x60 ./sources/video_camera.o
-                0x00000000000061f4                paintXY
- .text.paintLines
-                0x0000000000006254       0xb8 ./sources/video_camera.o
-                0x0000000000006254                paintLines
- .text.convertToRGBTest3
-                0x000000000000630c       0x80 ./sources/video_camera.o
-                0x000000000000630c                convertToRGBTest3
- .text.PORTB_IRQHandler
-                0x000000000000638c       0x30 ./sources/video_camera.o
-                0x000000000000638c                PORTB_IRQHandler
- .text.USB_DeviceVideoPrepareVideoData
-                0x00000000000063bc      0x20c ./sources/video_camera.o
- .text.USB_DeviceVideoIsoIn
-                0x00000000000065c8       0x3c ./sources/video_camera.o
- .text.USB_DeviceVideoApplicationSetDefault
-                0x0000000000006604      0x198 ./sources/video_camera.o
- .text.USB_DeviceCallback
-                0x000000000000679c      0x110 ./sources/video_camera.o
-                0x000000000000679c                USB_DeviceCallback
- .text.USB_DeviceGetSetupBuffer
-                0x00000000000068ac       0x2c ./sources/video_camera.o
-                0x00000000000068ac                USB_DeviceGetSetupBuffer
- .text.USB_DevcieConfigureRemoteWakeup
-                0x00000000000068d8       0x1c ./sources/video_camera.o
-                0x00000000000068d8                USB_DevcieConfigureRemoteWakeup
- .text.USB_DevcieConfigureEndpointStatus
-                0x00000000000068f4       0xa0 ./sources/video_camera.o
-                0x00000000000068f4                USB_DevcieConfigureEndpointStatus
- .text.USB_DeviceGetClassReceiveBuffer
-                0x0000000000006994       0x38 ./sources/video_camera.o
-                0x0000000000006994                USB_DeviceGetClassReceiveBuffer
- .text.USB_DeviceVideoProcessClassVsProbeRequest
-                0x00000000000069cc      0x130 ./sources/video_camera.o
- .text.USB_DeviceVideoProcessClassVsCommitRequest
-                0x0000000000006afc      0x114 ./sources/video_camera.o
- .text.USB_DeviceVideoProcessClassVsStillProbeRequest
-                0x0000000000006c10      0x110 ./sources/video_camera.o
- .text.USB_DeviceVideoProcessClassVsStillCommitRequest
-                0x0000000000006d20       0xf0 ./sources/video_camera.o
- .text.USB_DeviceVideoProcessClassVsStillImageTriggerRequest
-                0x0000000000006e10       0x74 ./sources/video_camera.o
- .text.USB_DeviceVideoProcessClassVsRequest
-                0x0000000000006e84       0xb8 ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcInterfaceRequest
-                0x0000000000006f3c       0x2c ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcCameraTerminalRequest
-                0x0000000000006f68       0x8c ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcInputTerminalRequest
-                0x0000000000006ff4       0x2c ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcOutputTerminalRequest
-                0x0000000000007020       0x20 ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcProcessingUintRequest
-                0x0000000000007040       0x88 ./sources/video_camera.o
- .text.USB_DeviceProcessClassVcRequest
-                0x00000000000070c8       0x84 ./sources/video_camera.o
- .text.USB_DeviceProcessClassRequest
-                0x000000000000714c       0x90 ./sources/video_camera.o
-                0x000000000000714c                USB_DeviceProcessClassRequest
- .text.USB0_IRQHandler
-                0x00000000000071dc       0x14 ./sources/video_camera.o
-                0x00000000000071dc                USB0_IRQHandler
- .text.USB_DeviceApplicationInit
-                0x00000000000071f0       0x88 ./sources/video_camera.o
- .text.main     0x0000000000007278       0x38 ./sources/video_camera.o
-                0x0000000000007278                main
- .text.USB_BmEnterCritical
-                0x00000000000072b0       0x28 ./osa/usb_osa_bm.o
-                0x00000000000072b0                USB_BmEnterCritical
- .text.USB_BmExitCritical
-                0x00000000000072d8       0x30 ./osa/usb_osa_bm.o
-                0x00000000000072d8                USB_BmExitCritical
- .text.CLOCK_EnableClock
-                0x0000000000007308       0x34 ./drivers/fsl_clock.o
- .text.CLOCK_DisableClock
-                0x000000000000733c       0x38 ./drivers/fsl_clock.o
- .text.CLOCK_SetEr32kClock
-                0x0000000000007374       0x2c ./drivers/fsl_clock.o
- .text.CLOCK_SetPllFllSelClock
-                0x00000000000073a0       0x58 ./drivers/fsl_clock.o
- .text.OSC_SetExtRefClkConfig
-                0x00000000000073f8       0x40 ./drivers/fsl_clock.o
- .text.OSC_SetCapLoad
-                0x0000000000007438       0x34 ./drivers/fsl_clock.o
- .text.CLOCK_GetMcgExtClkFreq
-                0x000000000000746c       0x8c ./drivers/fsl_clock.o
- .text.CLOCK_GetFllExtRefClkFreq
-                0x00000000000074f8       0xc8 ./drivers/fsl_clock.o
- .text.CLOCK_GetInternalRefClkSelectFreq
-                0x00000000000075c0       0x44 ./drivers/fsl_clock.o
- .text.CLOCK_GetFllRefClkFreq
-                0x0000000000007604       0x2c ./drivers/fsl_clock.o
- .text.CLOCK_GetPll0RefFreq
-                0x0000000000007630       0x10 ./drivers/fsl_clock.o
- .text.CLOCK_GetOscRangeFromFreq
-                0x0000000000007640       0x3c ./drivers/fsl_clock.o
- .text.CLOCK_GetOsc0ErClkUndivFreq
-                0x000000000000767c       0x48 ./drivers/fsl_clock.o
-                0x000000000000767c                CLOCK_GetOsc0ErClkUndivFreq
- .text.CLOCK_GetOsc0ErClkDivFreq
-                0x00000000000076c4       0x58 ./drivers/fsl_clock.o
-                0x00000000000076c4                CLOCK_GetOsc0ErClkDivFreq
- .text.CLOCK_GetEr32kClkFreq
-                0x000000000000771c       0x80 ./drivers/fsl_clock.o
-                0x000000000000771c                CLOCK_GetEr32kClkFreq
- .text.CLOCK_GetPllFllSelClkFreq
-                0x000000000000779c       0x84 ./drivers/fsl_clock.o
-                0x000000000000779c                CLOCK_GetPllFllSelClkFreq
- .text.CLOCK_GetOsc0ErClkFreq
-                0x0000000000007820       0x10 ./drivers/fsl_clock.o
-                0x0000000000007820                CLOCK_GetOsc0ErClkFreq
- .text.CLOCK_GetFreq
-                0x0000000000007830      0x14c ./drivers/fsl_clock.o
-                0x0000000000007830                CLOCK_GetFreq
- .text.CLOCK_SetSimConfig
-                0x000000000000797c       0x44 ./drivers/fsl_clock.o
-                0x000000000000797c                CLOCK_SetSimConfig
- .text.CLOCK_EnableUsbfs0Clock
-                0x00000000000079c0      0x100 ./drivers/fsl_clock.o
-                0x00000000000079c0                CLOCK_EnableUsbfs0Clock
- .text.CLOCK_GetOutClkFreq
-                0x0000000000007ac0       0x64 ./drivers/fsl_clock.o
-                0x0000000000007ac0                CLOCK_GetOutClkFreq
- .text.CLOCK_GetFllFreq
-                0x0000000000007b24       0x74 ./drivers/fsl_clock.o
-                0x0000000000007b24                CLOCK_GetFllFreq
- .text.CLOCK_GetInternalRefClkFreq
-                0x0000000000007b98       0x24 ./drivers/fsl_clock.o
-                0x0000000000007b98                CLOCK_GetInternalRefClkFreq
- .text.CLOCK_GetFixedFreqClkFreq
-                0x0000000000007bbc       0x30 ./drivers/fsl_clock.o
-                0x0000000000007bbc                CLOCK_GetFixedFreqClkFreq
- .text.CLOCK_GetPll0Freq
-                0x0000000000007bec       0x5c ./drivers/fsl_clock.o
-                0x0000000000007bec                CLOCK_GetPll0Freq
- .text.CLOCK_SetExternalRefClkConfig
-                0x0000000000007c48       0x90 ./drivers/fsl_clock.o
-                0x0000000000007c48                CLOCK_SetExternalRefClkConfig
- .text.CLOCK_SetInternalRefClkConfig
-                0x0000000000007cd8      0x104 ./drivers/fsl_clock.o
-                0x0000000000007cd8                CLOCK_SetInternalRefClkConfig
- .text.CLOCK_EnablePll0
-                0x0000000000007ddc       0x94 ./drivers/fsl_clock.o
-                0x0000000000007ddc                CLOCK_EnablePll0
- .text.CLOCK_InitOsc0
-                0x0000000000007e70       0x8c ./drivers/fsl_clock.o
-                0x0000000000007e70                CLOCK_InitOsc0
- .text.CLOCK_SetPbeMode
-                0x0000000000007efc       0x98 ./drivers/fsl_clock.o
-                0x0000000000007efc                CLOCK_SetPbeMode
- .text.CLOCK_BootToPeeMode
-                0x0000000000007f94       0x74 ./drivers/fsl_clock.o
-                0x0000000000007f94                CLOCK_BootToPeeMode
- .text.__assert_func
-                0x0000000000008008       0x28 ./drivers/fsl_common.o
-                0x0000000000008008                __assert_func
- .text.CLOCK_EnableClock
-                0x0000000000008030       0x34 ./drivers/fsl_dmamux.o
- .text.DMAMUX_GetInstance
-                0x0000000000008064       0x50 ./drivers/fsl_dmamux.o
- .text.DMAMUX_Init
-                0x00000000000080b4       0x20 ./drivers/fsl_dmamux.o
-                0x00000000000080b4                DMAMUX_Init
- .text.CLOCK_EnableClock
-                0x00000000000080d4       0x34 ./drivers/fsl_edma.o
- .text.EDMA_GetInstance
-                0x0000000000008108       0x50 ./drivers/fsl_edma.o
- .text.EDMA_Init
-                0x0000000000008158       0x8c ./drivers/fsl_edma.o
-                0x0000000000008158                EDMA_Init
- .text.EDMA_GetDefaultConfig
-                0x00000000000081e4       0x44 ./drivers/fsl_edma.o
-                0x00000000000081e4                EDMA_GetDefaultConfig
- .text.EDMA_SetModulo
-                0x0000000000008228       0x78 ./drivers/fsl_edma.o
-                0x0000000000008228                EDMA_SetModulo
- .text.EDMA_GetChannelStatusFlags
-                0x00000000000082a0       0x84 ./drivers/fsl_edma.o
-                0x00000000000082a0                EDMA_GetChannelStatusFlags
- .text.EDMA_ClearChannelStatusFlags
-                0x0000000000008324       0x68 ./drivers/fsl_edma.o
-                0x0000000000008324                EDMA_ClearChannelStatusFlags
- .text.EDMA_HandleIRQ
-                0x000000000000838c      0x154 ./drivers/fsl_edma.o
-                0x000000000000838c                EDMA_HandleIRQ
- .text.DMA0_DMA16_IRQHandler
-                0x00000000000084e0       0x48 ./drivers/fsl_edma.o
-                0x00000000000084e0                DMA0_DMA16_IRQHandler
- .text.DMA1_DMA17_IRQHandler
-                0x0000000000008528       0x48 ./drivers/fsl_edma.o
-                0x0000000000008528                DMA1_DMA17_IRQHandler
- .text.DMA2_DMA18_IRQHandler
-                0x0000000000008570       0x48 ./drivers/fsl_edma.o
-                0x0000000000008570                DMA2_DMA18_IRQHandler
- .text.DMA3_DMA19_IRQHandler
-                0x00000000000085b8       0x48 ./drivers/fsl_edma.o
-                0x00000000000085b8                DMA3_DMA19_IRQHandler
- .text.DMA4_DMA20_IRQHandler
-                0x0000000000008600       0x48 ./drivers/fsl_edma.o
-                0x0000000000008600                DMA4_DMA20_IRQHandler
- .text.DMA5_DMA21_IRQHandler
-                0x0000000000008648       0x48 ./drivers/fsl_edma.o
-                0x0000000000008648                DMA5_DMA21_IRQHandler
- .text.DMA6_DMA22_IRQHandler
-                0x0000000000008690       0x48 ./drivers/fsl_edma.o
-                0x0000000000008690                DMA6_DMA22_IRQHandler
- .text.DMA7_DMA23_IRQHandler
-                0x00000000000086d8       0x48 ./drivers/fsl_edma.o
-                0x00000000000086d8                DMA7_DMA23_IRQHandler
- .text.DMA8_DMA24_IRQHandler
-                0x0000000000008720       0x48 ./drivers/fsl_edma.o
-                0x0000000000008720                DMA8_DMA24_IRQHandler
- .text.DMA9_DMA25_IRQHandler
-                0x0000000000008768       0x48 ./drivers/fsl_edma.o
-                0x0000000000008768                DMA9_DMA25_IRQHandler
- .text.DMA10_DMA26_IRQHandler
-                0x00000000000087b0       0x48 ./drivers/fsl_edma.o
-                0x00000000000087b0                DMA10_DMA26_IRQHandler
- .text.DMA11_DMA27_IRQHandler
-                0x00000000000087f8       0x48 ./drivers/fsl_edma.o
-                0x00000000000087f8                DMA11_DMA27_IRQHandler
- .text.DMA12_DMA28_IRQHandler
-                0x0000000000008840       0x48 ./drivers/fsl_edma.o
-                0x0000000000008840                DMA12_DMA28_IRQHandler
- .text.DMA13_DMA29_IRQHandler
-                0x0000000000008888       0x48 ./drivers/fsl_edma.o
-                0x0000000000008888                DMA13_DMA29_IRQHandler
- .text.DMA14_DMA30_IRQHandler
-                0x00000000000088d0       0x48 ./drivers/fsl_edma.o
-                0x00000000000088d0                DMA14_DMA30_IRQHandler
- .text.DMA15_DMA31_IRQHandler
-                0x0000000000008918       0x48 ./drivers/fsl_edma.o
-                0x0000000000008918                DMA15_DMA31_IRQHandler
- .text.FLEXIO_Reset
-                0x0000000000008960       0x24 ./drivers/fsl_flexio.o
-                0x0000000000008960                FLEXIO_Reset
- .text.FLEXIO_GetShifterBufferAddress
-                0x0000000000008984       0xd0 ./drivers/fsl_flexio.o
-                0x0000000000008984                FLEXIO_GetShifterBufferAddress
- .text.FLEXIO_SetShifterConfig
-                0x0000000000008a54       0x9c ./drivers/fsl_flexio.o
-                0x0000000000008a54                FLEXIO_SetShifterConfig
- .text.FLEXIO_SetTimerConfig
-                0x0000000000008af0       0xe4 ./drivers/fsl_flexio.o
-                0x0000000000008af0                FLEXIO_SetTimerConfig
- .text.FLEXIO_CommonIRQHandler
-                0x0000000000008bd4       0x54 ./drivers/fsl_flexio.o
-                0x0000000000008bd4                FLEXIO_CommonIRQHandler
- .text.FLEXIO0_DriverIRQHandler
-                0x0000000000008c28        0xc ./drivers/fsl_flexio.o
-                0x0000000000008c28                FLEXIO0_DriverIRQHandler
- .text.CLOCK_EnableClock
-                0x0000000000008c34       0x34 ./drivers/fsl_flexio_camera.o
- .text.FLEXIO_ClearShifterStatusFlags
-                0x0000000000008c68       0x1c ./drivers/fsl_flexio_camera.o
- .text.FLEXIO_ClearShifterErrorFlags
-                0x0000000000008c84       0x1c ./drivers/fsl_flexio_camera.o
- .text.FLEXIO_ClearTimerStatusFlags
-                0x0000000000008ca0       0x1c ./drivers/fsl_flexio_camera.o
- .text.FLEXIO_CAMERA_GetDefaultConfig
-                0x0000000000008cbc       0x44 ./drivers/fsl_flexio_camera.o
-                0x0000000000008cbc                FLEXIO_CAMERA_GetDefaultConfig
- .text.FLEXIO_CAMERA_Init
-                0x0000000000008d00      0x1d8 ./drivers/fsl_flexio_camera.o
-                0x0000000000008d00                FLEXIO_CAMERA_Init
- .text.FLEXIO_CAMERA_ClearStatusFlags
-                0x0000000000008ed8       0x64 ./drivers/fsl_flexio_camera.o
-                0x0000000000008ed8                FLEXIO_CAMERA_ClearStatusFlags
- .text.GPIO_WritePinOutput
-                0x0000000000008f3c       0x3c ./drivers/fsl_gpio.o
- .text.GPIO_PinInit
-                0x0000000000008f78       0x70 ./drivers/fsl_gpio.o
-                0x0000000000008f78                GPIO_PinInit
- .text.CLOCK_EnableClock
-                0x0000000000008fe8       0x34 ./drivers/fsl_i2c.o
- .text.I2C_MasterClearStatusFlags
-                0x000000000000901c       0x58 ./drivers/fsl_i2c.o
- .text.I2C_GetInstance
-                0x0000000000009074       0x58 ./drivers/fsl_i2c.o
-                0x0000000000009074                I2C_GetInstance
- .text.I2C_TransferCommonIRQHandler
-                0x00000000000090cc       0x4c ./drivers/fsl_i2c.o
- .text.I2C_MasterInit
-                0x0000000000009118       0xe8 ./drivers/fsl_i2c.o
-                0x0000000000009118                I2C_MasterInit
- .text.I2C_MasterGetDefaultConfig
-                0x0000000000009200       0x50 ./drivers/fsl_i2c.o
-                0x0000000000009200                I2C_MasterGetDefaultConfig
- .text.I2C_MasterSetBaudRate
-                0x0000000000009250       0xd8 ./drivers/fsl_i2c.o
-                0x0000000000009250                I2C_MasterSetBaudRate
- .text.I2C_MasterStart
-                0x0000000000009328       0x74 ./drivers/fsl_i2c.o
-                0x0000000000009328                I2C_MasterStart
- .text.I2C_MasterStop
-                0x000000000000939c       0x58 ./drivers/fsl_i2c.o
-                0x000000000000939c                I2C_MasterStop
- .text.I2C_MasterGetStatusFlags
-                0x00000000000093f4       0x4c ./drivers/fsl_i2c.o
-                0x00000000000093f4                I2C_MasterGetStatusFlags
- .text.I2C_MasterWriteBlocking
-                0x0000000000009440       0xb0 ./drivers/fsl_i2c.o
-                0x0000000000009440                I2C_MasterWriteBlocking
- .text.I2C_MasterReadBlocking
-                0x00000000000094f0       0xc0 ./drivers/fsl_i2c.o
-                0x00000000000094f0                I2C_MasterReadBlocking
- .text.I2C0_DriverIRQHandler
-                0x00000000000095b0       0x1c ./drivers/fsl_i2c.o
-                0x00000000000095b0                I2C0_DriverIRQHandler
- .text.I2C1_DriverIRQHandler
-                0x00000000000095cc       0x1c ./drivers/fsl_i2c.o
-                0x00000000000095cc                I2C1_DriverIRQHandler
- .text.I2C2_DriverIRQHandler
-                0x00000000000095e8       0x1c ./drivers/fsl_i2c.o
-                0x00000000000095e8                I2C2_DriverIRQHandler
- .text.I2C3_DriverIRQHandler
-                0x0000000000009604       0x1c ./drivers/fsl_i2c.o
-                0x0000000000009604                I2C3_DriverIRQHandler
- .text.CLOCK_EnableClock
-                0x0000000000009620       0x34 ./drivers/fsl_lpuart.o
- .text.LPUART_GetInstance
-                0x0000000000009654       0x58 ./drivers/fsl_lpuart.o
-                0x0000000000009654                LPUART_GetInstance
- .text.LPUART_Init
-                0x00000000000096ac      0x2e8 ./drivers/fsl_lpuart.o
-                0x00000000000096ac                LPUART_Init
- .text.LPUART_GetDefaultConfig
-                0x0000000000009994       0x5c ./drivers/fsl_lpuart.o
-                0x0000000000009994                LPUART_GetDefaultConfig
- .text.LPUART_GetStatusFlags
-                0x00000000000099f0       0x2c ./drivers/fsl_lpuart.o
-                0x00000000000099f0                LPUART_GetStatusFlags
- .text.LPUART_ClearStatusFlags
-                0x0000000000009a1c       0x94 ./drivers/fsl_lpuart.o
-                0x0000000000009a1c                LPUART_ClearStatusFlags
- .text.LPUART_WriteBlocking
-                0x0000000000009ab0       0x40 ./drivers/fsl_lpuart.o
-                0x0000000000009ab0                LPUART_WriteBlocking
- .text.LPUART_ReadBlocking
-                0x0000000000009af0       0xac ./drivers/fsl_lpuart.o
-                0x0000000000009af0                LPUART_ReadBlocking
- .text.LPUART0_DriverIRQHandler
-                0x0000000000009b9c       0x20 ./drivers/fsl_lpuart.o
-                0x0000000000009b9c                LPUART0_DriverIRQHandler
- .text.LPUART1_DriverIRQHandler
-                0x0000000000009bbc       0x20 ./drivers/fsl_lpuart.o
-                0x0000000000009bbc                LPUART1_DriverIRQHandler
- .text.LPUART2_DriverIRQHandler
-                0x0000000000009bdc       0x20 ./drivers/fsl_lpuart.o
-                0x0000000000009bdc                LPUART2_DriverIRQHandler
- .text.LPUART3_DriverIRQHandler
-                0x0000000000009bfc       0x20 ./drivers/fsl_lpuart.o
-                0x0000000000009bfc                LPUART3_DriverIRQHandler
- .text.LPUART4_DriverIRQHandler
-                0x0000000000009c1c       0x20 ./drivers/fsl_lpuart.o
-                0x0000000000009c1c                LPUART4_DriverIRQHandler
- .text.CLOCK_SetLpuartClock
-                0x0000000000009c3c       0x38 ./board/board.o
- .text.BOARD_InitDebugConsole
-                0x0000000000009c74       0x2c ./board/board.o
-                0x0000000000009c74                BOARD_InitDebugConsole
- .text.CLOCK_SetXtal0Freq
-                0x0000000000009ca0       0x1c ./board/clock_config.o
- .text.CLOCK_SetSimSafeDivs
-                0x0000000000009cbc       0x20 ./board/clock_config.o
- .text.BOARD_BootClockRUN
-                0x0000000000009cdc       0x58 ./board/clock_config.o
-                0x0000000000009cdc                BOARD_BootClockRUN
- .text.CLOCK_EnableClock
-                0x0000000000009d34       0x34 ./board/pin_mux.o
+                0x00000000000057a4       0x30 ./sources/parkingasst.o
+ .text.EnableIRQ
+                0x00000000000057d4       0x1c ./sources/parkingasst.o
+ .text.LPTMR_EnableInterrupts
+                0x00000000000057f0       0x20 ./sources/parkingasst.o
+ .text.LPTMR_ClearStatusFlags
+                0x0000000000005810       0x20 ./sources/parkingasst.o
+ .text.LPTMR_SetTimerPeriod
+                0x0000000000005830       0x1c ./sources/parkingasst.o
+ .text.LPTMR_StartTimer
+                0x000000000000584c       0x20 ./sources/parkingasst.o
  .text.PORT_SetPinConfig
-                0x0000000000009d68       0x44 ./board/pin_mux.o
+                0x000000000000586c       0x44 ./sources/parkingasst.o
+ .text.LPTMR0_LPTMR1_IRQHandler
+                0x00000000000058b0       0x20 ./sources/parkingasst.o
+                0x00000000000058b0                LPTMR0_LPTMR1_IRQHandler
+ .text.init     0x00000000000058d0      0x168 ./sources/parkingasst.o
+                0x00000000000058d0                init
+ .text.sendWS2812Data
+                0x0000000000005a38      0x3d8 ./sources/parkingasst.o
+                0x0000000000005a38                sendWS2812Data
+ .text.presetIndicatorLEDs
+                0x0000000000005e10       0x70 ./sources/parkingasst.o
+                0x0000000000005e10                presetIndicatorLEDs
+ .text.runParkingAssistant
+                0x0000000000005e80      0x100 ./sources/parkingasst.o
+                0x0000000000005e80                runParkingAssistant
+ .text.locateMovingObject
+                0x0000000000005f80      0x120 ./sources/parkingasst.o
+                0x0000000000005f80                locateMovingObject
+ .text.convert2RGBandSavePrevious
+                0x00000000000060a0       0x9c ./sources/parkingasst.o
+                0x00000000000060a0                convert2RGBandSavePrevious
+ .text.paintXY  0x000000000000613c       0x60 ./sources/parkingasst.o
+                0x000000000000613c                paintXY
+ .text.shadowXY
+                0x000000000000619c       0xe0 ./sources/parkingasst.o
+                0x000000000000619c                shadowXY
+ .text.paintSquare
+                0x000000000000627c       0x64 ./sources/parkingasst.o
+                0x000000000000627c                paintSquare
+ .text.paintHArrow
+                0x00000000000062e0      0x134 ./sources/parkingasst.o
+                0x00000000000062e0                paintHArrow
+ .text.shadowSquare
+                0x0000000000006414       0x64 ./sources/parkingasst.o
+                0x0000000000006414                shadowSquare
+ .text.paintSymbols
+                0x0000000000006478      0x124 ./sources/parkingasst.o
+                0x0000000000006478                paintSymbols
+ .text.paintLineX
+                0x000000000000659c       0x5c ./sources/parkingasst.o
+                0x000000000000659c                paintLineX
+ .text.paintLineY
+                0x00000000000065f8       0x5c ./sources/parkingasst.o
+                0x00000000000065f8                paintLineY
+ .text.USB_DeviceCh9GetStatus
+                0x0000000000006654       0xe0 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9SetClearFeature
+                0x0000000000006734       0xf0 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9SetAddress
+                0x0000000000006824       0x8c ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9GetDescriptor
+                0x00000000000068b0       0x48 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9GetConfiguration
+                0x00000000000068f8       0x50 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9SetConfiguration
+                0x0000000000006948       0x70 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9GetInterface
+                0x00000000000069b8       0x54 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9SetInterface
+                0x0000000000006a0c       0x48 ./sources/usb_device_ch9.o
+ .text.USB_DeviceCh9SynchFrame
+                0x0000000000006a54       0x5c ./sources/usb_device_ch9.o
+ .text.USB_DeviceControlCallbackFeedback
+                0x0000000000006ab0       0xb0 ./sources/usb_device_ch9.o
+ .text.USB_DeviceControlCallback
+                0x0000000000006b60      0x21c ./sources/usb_device_ch9.o
+                0x0000000000006b60                USB_DeviceControlCallback
+ .text.USB_DeviceControlPipeInit
+                0x0000000000006d7c       0x7c ./sources/usb_device_ch9.o
+                0x0000000000006d7c                USB_DeviceControlPipeInit
+ .text.USB_DeviceGetDescriptor
+                0x0000000000006df8      0x118 ./sources/usb_device_descriptor.o
+                0x0000000000006df8                USB_DeviceGetDescriptor
+ .text.USB_DeviceSetConfigure
+                0x0000000000006f10       0x38 ./sources/usb_device_descriptor.o
+                0x0000000000006f10                USB_DeviceSetConfigure
+ .text.USB_DeviceGetConfigure
+                0x0000000000006f48       0x24 ./sources/usb_device_descriptor.o
+                0x0000000000006f48                USB_DeviceGetConfigure
+ .text.USB_DeviceSetInterface
+                0x0000000000006f6c       0x34 ./sources/usb_device_descriptor.o
+                0x0000000000006f6c                USB_DeviceSetInterface
+ .text.USB_DeviceGetInterface
+                0x0000000000006fa0       0x2c ./sources/usb_device_descriptor.o
+                0x0000000000006fa0                USB_DeviceGetInterface
+ .text.NVIC_EnableIRQ
+                0x0000000000006fcc       0x30 ./sources/video_camera.o
+ .text.NVIC_SetPriority
+                0x0000000000006ffc       0x54 ./sources/video_camera.o
+ .text.CLOCK_SetClkOutClock
+                0x0000000000007050       0x38 ./sources/video_camera.o
+ .text.PORT_ClearPinsInterruptFlags
+                0x0000000000007088       0x1c ./sources/video_camera.o
+ .text.callProgramWithNewImage
+                0x00000000000070a4       0xd4 ./sources/video_camera.o
+                0x00000000000070a4                callProgramWithNewImage
+ .text.PORTB_IRQHandler
+                0x0000000000007178       0x68 ./sources/video_camera.o
+                0x0000000000007178                PORTB_IRQHandler
+ .text.USB_DeviceVideoPrepareVideoData
+                0x00000000000071e0      0x20c ./sources/video_camera.o
+ .text.USB_DeviceVideoIsoIn
+                0x00000000000073ec       0x3c ./sources/video_camera.o
+ .text.USB_DeviceVideoApplicationSetDefault
+                0x0000000000007428      0x190 ./sources/video_camera.o
+ .text.USB_DeviceCallback
+                0x00000000000075b8      0x110 ./sources/video_camera.o
+                0x00000000000075b8                USB_DeviceCallback
+ .text.USB_DeviceGetSetupBuffer
+                0x00000000000076c8       0x2c ./sources/video_camera.o
+                0x00000000000076c8                USB_DeviceGetSetupBuffer
+ .text.USB_DevcieConfigureRemoteWakeup
+                0x00000000000076f4       0x1c ./sources/video_camera.o
+                0x00000000000076f4                USB_DevcieConfigureRemoteWakeup
+ .text.USB_DevcieConfigureEndpointStatus
+                0x0000000000007710       0xa0 ./sources/video_camera.o
+                0x0000000000007710                USB_DevcieConfigureEndpointStatus
+ .text.USB_DeviceGetClassReceiveBuffer
+                0x00000000000077b0       0x38 ./sources/video_camera.o
+                0x00000000000077b0                USB_DeviceGetClassReceiveBuffer
+ .text.USB_DeviceVideoProcessClassVsProbeRequest
+                0x00000000000077e8      0x130 ./sources/video_camera.o
+ .text.USB_DeviceVideoProcessClassVsCommitRequest
+                0x0000000000007918      0x114 ./sources/video_camera.o
+ .text.USB_DeviceVideoProcessClassVsStillProbeRequest
+                0x0000000000007a2c      0x110 ./sources/video_camera.o
+ .text.USB_DeviceVideoProcessClassVsStillCommitRequest
+                0x0000000000007b3c       0xf0 ./sources/video_camera.o
+ .text.USB_DeviceVideoProcessClassVsStillImageTriggerRequest
+                0x0000000000007c2c       0x74 ./sources/video_camera.o
+ .text.USB_DeviceVideoProcessClassVsRequest
+                0x0000000000007ca0       0xb8 ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcInterfaceRequest
+                0x0000000000007d58       0x2c ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcCameraTerminalRequest
+                0x0000000000007d84       0x8c ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcInputTerminalRequest
+                0x0000000000007e10       0x2c ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcOutputTerminalRequest
+                0x0000000000007e3c       0x20 ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcProcessingUintRequest
+                0x0000000000007e5c       0x88 ./sources/video_camera.o
+ .text.USB_DeviceProcessClassVcRequest
+                0x0000000000007ee4       0x84 ./sources/video_camera.o
+ .text.USB_DeviceProcessClassRequest
+                0x0000000000007f68       0x90 ./sources/video_camera.o
+                0x0000000000007f68                USB_DeviceProcessClassRequest
+ .text.USB0_IRQHandler
+                0x0000000000007ff8       0x14 ./sources/video_camera.o
+                0x0000000000007ff8                USB0_IRQHandler
+ .text.USB_DeviceApplicationInit
+                0x000000000000800c       0x88 ./sources/video_camera.o
+ .text.main     0x0000000000008094       0x3c ./sources/video_camera.o
+                0x0000000000008094                main
+ .text.USB_BmEnterCritical
+                0x00000000000080d0       0x28 ./osa/usb_osa_bm.o
+                0x00000000000080d0                USB_BmEnterCritical
+ .text.USB_BmExitCritical
+                0x00000000000080f8       0x30 ./osa/usb_osa_bm.o
+                0x00000000000080f8                USB_BmExitCritical
+ .text.CLOCK_EnableClock
+                0x0000000000008128       0x34 ./drivers/fsl_clock.o
+ .text.CLOCK_DisableClock
+                0x000000000000815c       0x38 ./drivers/fsl_clock.o
+ .text.CLOCK_SetEr32kClock
+                0x0000000000008194       0x2c ./drivers/fsl_clock.o
+ .text.CLOCK_SetPllFllSelClock
+                0x00000000000081c0       0x58 ./drivers/fsl_clock.o
+ .text.OSC_SetExtRefClkConfig
+                0x0000000000008218       0x40 ./drivers/fsl_clock.o
+ .text.OSC_SetCapLoad
+                0x0000000000008258       0x34 ./drivers/fsl_clock.o
+ .text.CLOCK_GetMcgExtClkFreq
+                0x000000000000828c       0x8c ./drivers/fsl_clock.o
+ .text.CLOCK_GetFllExtRefClkFreq
+                0x0000000000008318       0xc8 ./drivers/fsl_clock.o
+ .text.CLOCK_GetInternalRefClkSelectFreq
+                0x00000000000083e0       0x44 ./drivers/fsl_clock.o
+ .text.CLOCK_GetFllRefClkFreq
+                0x0000000000008424       0x2c ./drivers/fsl_clock.o
+ .text.CLOCK_GetPll0RefFreq
+                0x0000000000008450       0x10 ./drivers/fsl_clock.o
+ .text.CLOCK_GetOscRangeFromFreq
+                0x0000000000008460       0x3c ./drivers/fsl_clock.o
+ .text.CLOCK_GetOsc0ErClkUndivFreq
+                0x000000000000849c       0x48 ./drivers/fsl_clock.o
+                0x000000000000849c                CLOCK_GetOsc0ErClkUndivFreq
+ .text.CLOCK_GetOsc0ErClkDivFreq
+                0x00000000000084e4       0x58 ./drivers/fsl_clock.o
+                0x00000000000084e4                CLOCK_GetOsc0ErClkDivFreq
+ .text.CLOCK_GetEr32kClkFreq
+                0x000000000000853c       0x80 ./drivers/fsl_clock.o
+                0x000000000000853c                CLOCK_GetEr32kClkFreq
+ .text.CLOCK_GetPllFllSelClkFreq
+                0x00000000000085bc       0x84 ./drivers/fsl_clock.o
+                0x00000000000085bc                CLOCK_GetPllFllSelClkFreq
+ .text.CLOCK_GetOsc0ErClkFreq
+                0x0000000000008640       0x10 ./drivers/fsl_clock.o
+                0x0000000000008640                CLOCK_GetOsc0ErClkFreq
+ .text.CLOCK_GetFreq
+                0x0000000000008650      0x14c ./drivers/fsl_clock.o
+                0x0000000000008650                CLOCK_GetFreq
+ .text.CLOCK_SetSimConfig
+                0x000000000000879c       0x44 ./drivers/fsl_clock.o
+                0x000000000000879c                CLOCK_SetSimConfig
+ .text.CLOCK_EnableUsbfs0Clock
+                0x00000000000087e0      0x100 ./drivers/fsl_clock.o
+                0x00000000000087e0                CLOCK_EnableUsbfs0Clock
+ .text.CLOCK_GetOutClkFreq
+                0x00000000000088e0       0x64 ./drivers/fsl_clock.o
+                0x00000000000088e0                CLOCK_GetOutClkFreq
+ .text.CLOCK_GetFllFreq
+                0x0000000000008944       0x74 ./drivers/fsl_clock.o
+                0x0000000000008944                CLOCK_GetFllFreq
+ .text.CLOCK_GetInternalRefClkFreq
+                0x00000000000089b8       0x24 ./drivers/fsl_clock.o
+                0x00000000000089b8                CLOCK_GetInternalRefClkFreq
+ .text.CLOCK_GetFixedFreqClkFreq
+                0x00000000000089dc       0x30 ./drivers/fsl_clock.o
+                0x00000000000089dc                CLOCK_GetFixedFreqClkFreq
+ .text.CLOCK_GetPll0Freq
+                0x0000000000008a0c       0x5c ./drivers/fsl_clock.o
+                0x0000000000008a0c                CLOCK_GetPll0Freq
+ .text.CLOCK_SetExternalRefClkConfig
+                0x0000000000008a68       0x90 ./drivers/fsl_clock.o
+                0x0000000000008a68                CLOCK_SetExternalRefClkConfig
+ .text.CLOCK_SetInternalRefClkConfig
+                0x0000000000008af8      0x104 ./drivers/fsl_clock.o
+                0x0000000000008af8                CLOCK_SetInternalRefClkConfig
+ .text.CLOCK_EnablePll0
+                0x0000000000008bfc       0x94 ./drivers/fsl_clock.o
+                0x0000000000008bfc                CLOCK_EnablePll0
+ .text.CLOCK_InitOsc0
+                0x0000000000008c90       0x8c ./drivers/fsl_clock.o
+                0x0000000000008c90                CLOCK_InitOsc0
+ .text.CLOCK_SetPbeMode
+                0x0000000000008d1c       0x98 ./drivers/fsl_clock.o
+                0x0000000000008d1c                CLOCK_SetPbeMode
+ .text.CLOCK_BootToPeeMode
+                0x0000000000008db4       0x74 ./drivers/fsl_clock.o
+                0x0000000000008db4                CLOCK_BootToPeeMode
+ .text.__assert_func
+                0x0000000000008e28       0x28 ./drivers/fsl_common.o
+                0x0000000000008e28                __assert_func
+ .text.CLOCK_EnableClock
+                0x0000000000008e50       0x34 ./drivers/fsl_dmamux.o
+ .text.DMAMUX_GetInstance
+                0x0000000000008e84       0x50 ./drivers/fsl_dmamux.o
+ .text.DMAMUX_Init
+                0x0000000000008ed4       0x20 ./drivers/fsl_dmamux.o
+                0x0000000000008ed4                DMAMUX_Init
+ .text.CLOCK_EnableClock
+                0x0000000000008ef4       0x34 ./drivers/fsl_edma.o
+ .text.EDMA_GetInstance
+                0x0000000000008f28       0x50 ./drivers/fsl_edma.o
+ .text.EDMA_Init
+                0x0000000000008f78       0x8c ./drivers/fsl_edma.o
+                0x0000000000008f78                EDMA_Init
+ .text.EDMA_GetDefaultConfig
+                0x0000000000009004       0x44 ./drivers/fsl_edma.o
+                0x0000000000009004                EDMA_GetDefaultConfig
+ .text.EDMA_SetModulo
+                0x0000000000009048       0x78 ./drivers/fsl_edma.o
+                0x0000000000009048                EDMA_SetModulo
+ .text.EDMA_GetChannelStatusFlags
+                0x00000000000090c0       0x84 ./drivers/fsl_edma.o
+                0x00000000000090c0                EDMA_GetChannelStatusFlags
+ .text.EDMA_ClearChannelStatusFlags
+                0x0000000000009144       0x68 ./drivers/fsl_edma.o
+                0x0000000000009144                EDMA_ClearChannelStatusFlags
+ .text.EDMA_HandleIRQ
+                0x00000000000091ac      0x154 ./drivers/fsl_edma.o
+                0x00000000000091ac                EDMA_HandleIRQ
+ .text.DMA0_DMA16_IRQHandler
+                0x0000000000009300       0x48 ./drivers/fsl_edma.o
+                0x0000000000009300                DMA0_DMA16_IRQHandler
+ .text.DMA1_DMA17_IRQHandler
+                0x0000000000009348       0x48 ./drivers/fsl_edma.o
+                0x0000000000009348                DMA1_DMA17_IRQHandler
+ .text.DMA2_DMA18_IRQHandler
+                0x0000000000009390       0x48 ./drivers/fsl_edma.o
+                0x0000000000009390                DMA2_DMA18_IRQHandler
+ .text.DMA3_DMA19_IRQHandler
+                0x00000000000093d8       0x48 ./drivers/fsl_edma.o
+                0x00000000000093d8                DMA3_DMA19_IRQHandler
+ .text.DMA4_DMA20_IRQHandler
+                0x0000000000009420       0x48 ./drivers/fsl_edma.o
+                0x0000000000009420                DMA4_DMA20_IRQHandler
+ .text.DMA5_DMA21_IRQHandler
+                0x0000000000009468       0x48 ./drivers/fsl_edma.o
+                0x0000000000009468                DMA5_DMA21_IRQHandler
+ .text.DMA6_DMA22_IRQHandler
+                0x00000000000094b0       0x48 ./drivers/fsl_edma.o
+                0x00000000000094b0                DMA6_DMA22_IRQHandler
+ .text.DMA7_DMA23_IRQHandler
+                0x00000000000094f8       0x48 ./drivers/fsl_edma.o
+                0x00000000000094f8                DMA7_DMA23_IRQHandler
+ .text.DMA8_DMA24_IRQHandler
+                0x0000000000009540       0x48 ./drivers/fsl_edma.o
+                0x0000000000009540                DMA8_DMA24_IRQHandler
+ .text.DMA9_DMA25_IRQHandler
+                0x0000000000009588       0x48 ./drivers/fsl_edma.o
+                0x0000000000009588                DMA9_DMA25_IRQHandler
+ .text.DMA10_DMA26_IRQHandler
+                0x00000000000095d0       0x48 ./drivers/fsl_edma.o
+                0x00000000000095d0                DMA10_DMA26_IRQHandler
+ .text.DMA11_DMA27_IRQHandler
+                0x0000000000009618       0x48 ./drivers/fsl_edma.o
+                0x0000000000009618                DMA11_DMA27_IRQHandler
+ .text.DMA12_DMA28_IRQHandler
+                0x0000000000009660       0x48 ./drivers/fsl_edma.o
+                0x0000000000009660                DMA12_DMA28_IRQHandler
+ .text.DMA13_DMA29_IRQHandler
+                0x00000000000096a8       0x48 ./drivers/fsl_edma.o
+                0x00000000000096a8                DMA13_DMA29_IRQHandler
+ .text.DMA14_DMA30_IRQHandler
+                0x00000000000096f0       0x48 ./drivers/fsl_edma.o
+                0x00000000000096f0                DMA14_DMA30_IRQHandler
+ .text.DMA15_DMA31_IRQHandler
+                0x0000000000009738       0x48 ./drivers/fsl_edma.o
+                0x0000000000009738                DMA15_DMA31_IRQHandler
+ .text.FLEXIO_Reset
+                0x0000000000009780       0x24 ./drivers/fsl_flexio.o
+                0x0000000000009780                FLEXIO_Reset
+ .text.FLEXIO_GetShifterBufferAddress
+                0x00000000000097a4       0xd0 ./drivers/fsl_flexio.o
+                0x00000000000097a4                FLEXIO_GetShifterBufferAddress
+ .text.FLEXIO_SetShifterConfig
+                0x0000000000009874       0x9c ./drivers/fsl_flexio.o
+                0x0000000000009874                FLEXIO_SetShifterConfig
+ .text.FLEXIO_SetTimerConfig
+                0x0000000000009910       0xe4 ./drivers/fsl_flexio.o
+                0x0000000000009910                FLEXIO_SetTimerConfig
+ .text.FLEXIO_CommonIRQHandler
+                0x00000000000099f4       0x54 ./drivers/fsl_flexio.o
+                0x00000000000099f4                FLEXIO_CommonIRQHandler
+ .text.FLEXIO0_DriverIRQHandler
+                0x0000000000009a48        0xc ./drivers/fsl_flexio.o
+                0x0000000000009a48                FLEXIO0_DriverIRQHandler
+ .text.CLOCK_EnableClock
+                0x0000000000009a54       0x34 ./drivers/fsl_flexio_camera.o
+ .text.FLEXIO_ClearShifterStatusFlags
+                0x0000000000009a88       0x1c ./drivers/fsl_flexio_camera.o
+ .text.FLEXIO_ClearShifterErrorFlags
+                0x0000000000009aa4       0x1c ./drivers/fsl_flexio_camera.o
+ .text.FLEXIO_ClearTimerStatusFlags
+                0x0000000000009ac0       0x1c ./drivers/fsl_flexio_camera.o
+ .text.FLEXIO_CAMERA_GetDefaultConfig
+                0x0000000000009adc       0x44 ./drivers/fsl_flexio_camera.o
+                0x0000000000009adc                FLEXIO_CAMERA_GetDefaultConfig
+ .text.FLEXIO_CAMERA_Init
+                0x0000000000009b20      0x1d8 ./drivers/fsl_flexio_camera.o
+                0x0000000000009b20                FLEXIO_CAMERA_Init
+ .text.FLEXIO_CAMERA_ClearStatusFlags
+                0x0000000000009cf8       0x64 ./drivers/fsl_flexio_camera.o
+                0x0000000000009cf8                FLEXIO_CAMERA_ClearStatusFlags
+ .text.GPIO_WritePinOutput
+                0x0000000000009d5c       0x3c ./drivers/fsl_gpio.o
+ .text.GPIO_PinInit
+                0x0000000000009d98       0x70 ./drivers/fsl_gpio.o
+                0x0000000000009d98                GPIO_PinInit
+ .text.CLOCK_EnableClock
+                0x0000000000009e08       0x34 ./drivers/fsl_i2c.o
+ .text.I2C_MasterClearStatusFlags
+                0x0000000000009e3c       0x58 ./drivers/fsl_i2c.o
+ .text.I2C_GetInstance
+                0x0000000000009e94       0x58 ./drivers/fsl_i2c.o
+                0x0000000000009e94                I2C_GetInstance
+ .text.I2C_TransferCommonIRQHandler
+                0x0000000000009eec       0x4c ./drivers/fsl_i2c.o
+ .text.I2C_MasterInit
+                0x0000000000009f38       0xe8 ./drivers/fsl_i2c.o
+                0x0000000000009f38                I2C_MasterInit
+ .text.I2C_MasterGetDefaultConfig
+                0x000000000000a020       0x50 ./drivers/fsl_i2c.o
+                0x000000000000a020                I2C_MasterGetDefaultConfig
+ .text.I2C_MasterSetBaudRate
+                0x000000000000a070       0xd8 ./drivers/fsl_i2c.o
+                0x000000000000a070                I2C_MasterSetBaudRate
+ .text.I2C_MasterStart
+                0x000000000000a148       0x74 ./drivers/fsl_i2c.o
+                0x000000000000a148                I2C_MasterStart
+ .text.I2C_MasterStop
+                0x000000000000a1bc       0x58 ./drivers/fsl_i2c.o
+                0x000000000000a1bc                I2C_MasterStop
+ .text.I2C_MasterGetStatusFlags
+                0x000000000000a214       0x4c ./drivers/fsl_i2c.o
+                0x000000000000a214                I2C_MasterGetStatusFlags
+ .text.I2C_MasterWriteBlocking
+                0x000000000000a260       0xb0 ./drivers/fsl_i2c.o
+                0x000000000000a260                I2C_MasterWriteBlocking
+ .text.I2C_MasterReadBlocking
+                0x000000000000a310       0xc0 ./drivers/fsl_i2c.o
+                0x000000000000a310                I2C_MasterReadBlocking
+ .text.I2C0_DriverIRQHandler
+                0x000000000000a3d0       0x1c ./drivers/fsl_i2c.o
+                0x000000000000a3d0                I2C0_DriverIRQHandler
+ .text.I2C1_DriverIRQHandler
+                0x000000000000a3ec       0x1c ./drivers/fsl_i2c.o
+                0x000000000000a3ec                I2C1_DriverIRQHandler
+ .text.I2C2_DriverIRQHandler
+                0x000000000000a408       0x1c ./drivers/fsl_i2c.o
+                0x000000000000a408                I2C2_DriverIRQHandler
+ .text.I2C3_DriverIRQHandler
+                0x000000000000a424       0x1c ./drivers/fsl_i2c.o
+                0x000000000000a424                I2C3_DriverIRQHandler
+ .text.CLOCK_EnableClock
+                0x000000000000a440       0x34 ./drivers/fsl_lptmr.o
+ .text.LPTMR_GetInstance
+                0x000000000000a474       0x58 ./drivers/fsl_lptmr.o
+ .text.LPTMR_Init
+                0x000000000000a4cc       0x9c ./drivers/fsl_lptmr.o
+                0x000000000000a4cc                LPTMR_Init
+ .text.LPTMR_GetDefaultConfig
+                0x000000000000a568       0x58 ./drivers/fsl_lptmr.o
+                0x000000000000a568                LPTMR_GetDefaultConfig
+ .text.CLOCK_EnableClock
+                0x000000000000a5c0       0x34 ./drivers/fsl_lpuart.o
+ .text.LPUART_GetInstance
+                0x000000000000a5f4       0x58 ./drivers/fsl_lpuart.o
+                0x000000000000a5f4                LPUART_GetInstance
+ .text.LPUART_Init
+                0x000000000000a64c      0x2e8 ./drivers/fsl_lpuart.o
+                0x000000000000a64c                LPUART_Init
+ .text.LPUART_GetDefaultConfig
+                0x000000000000a934       0x5c ./drivers/fsl_lpuart.o
+                0x000000000000a934                LPUART_GetDefaultConfig
+ .text.LPUART_GetStatusFlags
+                0x000000000000a990       0x2c ./drivers/fsl_lpuart.o
+                0x000000000000a990                LPUART_GetStatusFlags
+ .text.LPUART_ClearStatusFlags
+                0x000000000000a9bc       0x94 ./drivers/fsl_lpuart.o
+                0x000000000000a9bc                LPUART_ClearStatusFlags
+ .text.LPUART_WriteBlocking
+                0x000000000000aa50       0x40 ./drivers/fsl_lpuart.o
+                0x000000000000aa50                LPUART_WriteBlocking
+ .text.LPUART_ReadBlocking
+                0x000000000000aa90       0xac ./drivers/fsl_lpuart.o
+                0x000000000000aa90                LPUART_ReadBlocking
+ .text.LPUART0_DriverIRQHandler
+                0x000000000000ab3c       0x20 ./drivers/fsl_lpuart.o
+                0x000000000000ab3c                LPUART0_DriverIRQHandler
+ .text.LPUART1_DriverIRQHandler
+                0x000000000000ab5c       0x20 ./drivers/fsl_lpuart.o
+                0x000000000000ab5c                LPUART1_DriverIRQHandler
+ .text.LPUART2_DriverIRQHandler
+                0x000000000000ab7c       0x20 ./drivers/fsl_lpuart.o
+                0x000000000000ab7c                LPUART2_DriverIRQHandler
+ .text.LPUART3_DriverIRQHandler
+                0x000000000000ab9c       0x20 ./drivers/fsl_lpuart.o
+                0x000000000000ab9c                LPUART3_DriverIRQHandler
+ .text.LPUART4_DriverIRQHandler
+                0x000000000000abbc       0x20 ./drivers/fsl_lpuart.o
+                0x000000000000abbc                LPUART4_DriverIRQHandler
+ .text.CLOCK_SetLpuartClock
+                0x000000000000abdc       0x38 ./board/board.o
+ .text.BOARD_InitDebugConsole
+                0x000000000000ac14       0x2c ./board/board.o
+                0x000000000000ac14                BOARD_InitDebugConsole
+ .text.CLOCK_SetXtal0Freq
+                0x000000000000ac40       0x1c ./board/clock_config.o
+ .text.CLOCK_SetSimSafeDivs
+                0x000000000000ac5c       0x20 ./board/clock_config.o
+ .text.BOARD_BootClockRUN
+                0x000000000000ac7c       0x58 ./board/clock_config.o
+                0x000000000000ac7c                BOARD_BootClockRUN
+ .text.CLOCK_EnableClock
+                0x000000000000acd4       0x34 ./board/pin_mux.o
+ .text.PORT_SetPinConfig
+                0x000000000000ad08       0x44 ./board/pin_mux.o
  .text.PORT_SetPinMux
-                0x0000000000009dac       0x38 ./board/pin_mux.o
+                0x000000000000ad4c       0x38 ./board/pin_mux.o
  .text.PORT_SetPinInterruptConfig
-                0x0000000000009de4       0x38 ./board/pin_mux.o
+                0x000000000000ad84       0x38 ./board/pin_mux.o
  .text.BOARD_InitPins
-                0x0000000000009e1c      0x170 ./board/pin_mux.o
-                0x0000000000009e1c                BOARD_InitPins
- .text.modf     0x0000000000009f8c       0xa4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
-                0x0000000000009f8c                modf
- .text.pow      0x000000000000a030      0x340 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
-                0x000000000000a030                pow
+                0x000000000000adbc      0x170 ./board/pin_mux.o
+                0x000000000000adbc                BOARD_InitPins
+ .text.modf     0x000000000000af2c       0xa4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
+                0x000000000000af2c                modf
+ .text.pow      0x000000000000afd0      0x340 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
+                0x000000000000afd0                pow
  .text.__ieee754_pow
-                0x000000000000a370      0xae8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
-                0x000000000000a370                __ieee754_pow
+                0x000000000000b310      0xae8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+                0x000000000000b310                __ieee754_pow
  .text.__ieee754_sqrt
-                0x000000000000ae58      0x198 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
-                0x000000000000ae58                __ieee754_sqrt
- .text.fabs     0x000000000000aff0       0x14 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
-                0x000000000000aff0                fabs
- .text.finite   0x000000000000b004       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
-                0x000000000000b004                finite
+                0x000000000000bdf8      0x198 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
+                0x000000000000bdf8                __ieee754_sqrt
+ .text.fabs     0x000000000000bf90       0x14 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
+                0x000000000000bf90                fabs
+ .text.finite   0x000000000000bfa4       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
+                0x000000000000bfa4                finite
  .text.__fpclassifyd
-                0x000000000000b014       0x54 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
-                0x000000000000b014                __fpclassifyd
- .text.matherr  0x000000000000b068        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
-                0x000000000000b068                matherr
- *fill*         0x000000000000b06c        0x4 
- .text.nan      0x000000000000b070       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
-                0x000000000000b070                nan
- .text.rint     0x000000000000b080      0x120 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
-                0x000000000000b080                rint
- .text.scalbn   0x000000000000b1a0      0x120 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
-                0x000000000000b1a0                scalbn
+                0x000000000000bfb4       0x54 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
+                0x000000000000bfb4                __fpclassifyd
+ .text.matherr  0x000000000000c008        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
+                0x000000000000c008                matherr
+ *fill*         0x000000000000c00c        0x4 
+ .text.nan      0x000000000000c010       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
+                0x000000000000c010                nan
+ .text.rint     0x000000000000c020      0x120 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
+                0x000000000000c020                rint
+ .text.scalbn   0x000000000000c140      0x120 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
+                0x000000000000c140                scalbn
  .text.copysign
-                0x000000000000b2c0       0x24 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
-                0x000000000000b2c0                copysign
- .text.__errno  0x000000000000b2e4        0xc /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
-                0x000000000000b2e4                __errno
- .text.exit     0x000000000000b2f0       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
-                0x000000000000b2f0                exit
+                0x000000000000c260       0x24 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
+                0x000000000000c260                copysign
+ .text.__errno  0x000000000000c284        0xc /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
+                0x000000000000c284                __errno
+ .text.exit     0x000000000000c290       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+                0x000000000000c290                exit
  .text.__libc_init_array
-                0x000000000000b318       0x4c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
-                0x000000000000b318                __libc_init_array
- .text.memset   0x000000000000b364       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
-                0x000000000000b364                memset
- .text.strlen   0x000000000000b374       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
-                0x000000000000b374                strlen
- .text._exit    0x000000000000b384        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
-                0x000000000000b384                _exit
+                0x000000000000c2b8       0x4c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+                0x000000000000c2b8                __libc_init_array
+ .text.memset   0x000000000000c304       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+                0x000000000000c304                memset
+ .text.strlen   0x000000000000c314       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+                0x000000000000c314                strlen
+ .text._exit    0x000000000000c324        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+                0x000000000000c324                _exit
  *(.rodata)
- .rodata        0x000000000000b388      0x1a8 ./sources/flexio_ov7670.o
- .rodata        0x000000000000b530       0x8c ./sources/video_camera.o
- .rodata        0x000000000000b5bc       0x94 ./drivers/fsl_clock.o
- .rodata        0x000000000000b650       0x40 ./drivers/fsl_common.o
- .rodata        0x000000000000b690       0x98 ./drivers/fsl_dmamux.o
- .rodata        0x000000000000b728      0x290 ./drivers/fsl_edma.o
- .rodata        0x000000000000b9b8       0xb0 ./drivers/fsl_flexio.o
- .rodata        0x000000000000ba68       0x90 ./drivers/fsl_flexio_camera.o
- .rodata        0x000000000000baf8       0xa0 ./drivers/fsl_gpio.o
- .rodata        0x000000000000bb98      0x124 ./drivers/fsl_i2c.o
- .rodata        0x000000000000bcbc      0x128 ./drivers/fsl_lpuart.o
- .rodata        0x000000000000bde4       0x44 ./board/pin_mux.o
+ .rodata        0x000000000000c328      0x1a8 ./sources/flexio_ov7670.o
+ .rodata        0x000000000000c4d0       0xbc ./sources/parkingasst.o
+ .rodata        0x000000000000c58c       0xb4 ./sources/video_camera.o
+ .rodata        0x000000000000c640       0x94 ./drivers/fsl_clock.o
+ .rodata        0x000000000000c6d4       0x40 ./drivers/fsl_common.o
+ .rodata        0x000000000000c714       0x98 ./drivers/fsl_dmamux.o
+ .rodata        0x000000000000c7ac      0x290 ./drivers/fsl_edma.o
+ .rodata        0x000000000000ca3c       0xb0 ./drivers/fsl_flexio.o
+ .rodata        0x000000000000caec       0x90 ./drivers/fsl_flexio_camera.o
+ .rodata        0x000000000000cb7c       0xa0 ./drivers/fsl_gpio.o
+ .rodata        0x000000000000cc1c      0x124 ./drivers/fsl_i2c.o
+ .rodata        0x000000000000cd40       0xa0 ./drivers/fsl_lptmr.o
+ .rodata        0x000000000000cde0      0x128 ./drivers/fsl_lpuart.o
+ .rodata        0x000000000000cf08       0x44 ./board/pin_mux.o
  *(.rodata*)
  .rodata.s_UsbDeviceKhciInterface
-                0x000000000000be28       0x18 ./usb/device/source/usb_device_dci.o
+                0x000000000000cf4c       0x18 ./usb/device/source/usb_device_dci.o
  .rodata.__func__.8310
-                0x000000000000be40       0x1c ./sources/flexio_ov7670.o
+                0x000000000000cf64       0x1c ./sources/flexio_ov7670.o
  .rodata.__func__.7651
-                0x000000000000be5c       0x14 ./sources/flexio_ov7670.o
+                0x000000000000cf80       0x14 ./sources/flexio_ov7670.o
  .rodata.__func__.7576
-                0x000000000000be70       0x1c ./sources/flexio_ov7670.o
+                0x000000000000cf94       0x1c ./sources/flexio_ov7670.o
  .rodata.__func__.7640
-                0x000000000000be8c       0x18 ./sources/flexio_ov7670.o
+                0x000000000000cfb0       0x18 ./sources/flexio_ov7670.o
+ .rodata.__func__.6855
+                0x000000000000cfc8       0x14 ./sources/parkingasst.o
  .rodata.s_UsbDeviceStandardRequest
-                0x000000000000bea4       0x34 ./sources/usb_device_ch9.o
+                0x000000000000cfdc       0x34 ./sources/usb_device_ch9.o
  .rodata.__func__.6621
-                0x000000000000bed8       0x18 ./drivers/fsl_clock.o
+                0x000000000000d010       0x18 ./drivers/fsl_clock.o
  .rodata.__func__.6666
-                0x000000000000bef0       0x1c ./drivers/fsl_clock.o
+                0x000000000000d028       0x1c ./drivers/fsl_clock.o
  .rodata.__func__.6670
-                0x000000000000bf0c       0x1c ./drivers/fsl_clock.o
+                0x000000000000d044       0x1c ./drivers/fsl_clock.o
  .rodata.__func__.6678
-                0x000000000000bf28       0x18 ./drivers/fsl_clock.o
+                0x000000000000d060       0x18 ./drivers/fsl_clock.o
  .rodata.fllFactorTable.6757
-                0x000000000000bf40       0x10 ./drivers/fsl_clock.o
+                0x000000000000d078       0x10 ./drivers/fsl_clock.o
  .rodata.__func__.6819
-                0x000000000000bf50       0x14 ./drivers/fsl_clock.o
+                0x000000000000d088       0x14 ./drivers/fsl_clock.o
  .rodata.__func__.7015
-                0x000000000000bf64       0x14 ./drivers/fsl_clock.o
+                0x000000000000d09c       0x14 ./drivers/fsl_clock.o
  .rodata.__func__.6631
-                0x000000000000bf78       0x14 ./drivers/fsl_dmamux.o
+                0x000000000000d0b0       0x14 ./drivers/fsl_dmamux.o
  .rodata.__func__.6897
-                0x000000000000bf8c       0x14 ./drivers/fsl_edma.o
+                0x000000000000d0c4       0x14 ./drivers/fsl_edma.o
  .rodata.__func__.6908
-                0x000000000000bfa0        0xc ./drivers/fsl_edma.o
+                0x000000000000d0d8        0xc ./drivers/fsl_edma.o
  .rodata.__func__.6916
-                0x000000000000bfac       0x18 ./drivers/fsl_edma.o
+                0x000000000000d0e4       0x18 ./drivers/fsl_edma.o
  .rodata.__func__.6955
-                0x000000000000bfc4       0x10 ./drivers/fsl_edma.o
+                0x000000000000d0fc       0x10 ./drivers/fsl_edma.o
  .rodata.__func__.7021
-                0x000000000000bfd4       0x1c ./drivers/fsl_edma.o
+                0x000000000000d10c       0x1c ./drivers/fsl_edma.o
  .rodata.__func__.7028
-                0x000000000000bff0       0x20 ./drivers/fsl_edma.o
+                0x000000000000d128       0x20 ./drivers/fsl_edma.o
  .rodata.__func__.7107
-                0x000000000000c010       0x10 ./drivers/fsl_edma.o
+                0x000000000000d148       0x10 ./drivers/fsl_edma.o
  .rodata.__func__.6848
-                0x000000000000c020       0x20 ./drivers/fsl_flexio.o
+                0x000000000000d158       0x20 ./drivers/fsl_flexio.o
  .rodata.__func__.6880
-                0x000000000000c040       0x20 ./drivers/fsl_flexio_camera.o
+                0x000000000000d178       0x20 ./drivers/fsl_flexio_camera.o
  .rodata.__func__.6885
-                0x000000000000c060       0x14 ./drivers/fsl_flexio_camera.o
+                0x000000000000d198       0x14 ./drivers/fsl_flexio_camera.o
  .rodata.__func__.6645
-                0x000000000000c074       0x10 ./drivers/fsl_gpio.o
+                0x000000000000d1ac       0x10 ./drivers/fsl_gpio.o
  .rodata.s_i2cDividerTable
-                0x000000000000c084       0x80 ./drivers/fsl_i2c.o
-                0x000000000000c084                s_i2cDividerTable
+                0x000000000000d1bc       0x80 ./drivers/fsl_i2c.o
+                0x000000000000d1bc                s_i2cDividerTable
  .rodata.s_i2cBases
-                0x000000000000c104       0x10 ./drivers/fsl_i2c.o
+                0x000000000000d23c       0x10 ./drivers/fsl_i2c.o
  .rodata.s_i2cClocks
-                0x000000000000c114       0x10 ./drivers/fsl_i2c.o
-                0x000000000000c114                s_i2cClocks
+                0x000000000000d24c       0x10 ./drivers/fsl_i2c.o
+                0x000000000000d24c                s_i2cClocks
  .rodata.__func__.6847
-                0x000000000000c124       0x10 ./drivers/fsl_i2c.o
+                0x000000000000d25c       0x10 ./drivers/fsl_i2c.o
  .rodata.__func__.6888
-                0x000000000000c134       0x10 ./drivers/fsl_i2c.o
+                0x000000000000d26c       0x10 ./drivers/fsl_i2c.o
  .rodata.__func__.6897
-                0x000000000000c144       0x1c ./drivers/fsl_i2c.o
+                0x000000000000d27c       0x1c ./drivers/fsl_i2c.o
+ .rodata.s_lptmrBases
+                0x000000000000d298        0x8 ./drivers/fsl_lptmr.o
+ .rodata.s_lptmrClocks
+                0x000000000000d2a0        0x8 ./drivers/fsl_lptmr.o
+ .rodata.__func__.6692
+                0x000000000000d2a8       0x14 ./drivers/fsl_lptmr.o
+ .rodata.__func__.6697
+                0x000000000000d2bc        0xc ./drivers/fsl_lptmr.o
+ .rodata.__func__.6704
+                0x000000000000d2c8       0x18 ./drivers/fsl_lptmr.o
  .rodata.s_lpuartBases
-                0x000000000000c160       0x14 ./drivers/fsl_lpuart.o
+                0x000000000000d2e0       0x14 ./drivers/fsl_lpuart.o
  .rodata.s_lpuartClock
-                0x000000000000c174       0x14 ./drivers/fsl_lpuart.o
+                0x000000000000d2f4       0x14 ./drivers/fsl_lpuart.o
  .rodata.__func__.6815
-                0x000000000000c188       0x14 ./drivers/fsl_lpuart.o
+                0x000000000000d308       0x14 ./drivers/fsl_lpuart.o
  .rodata.__func__.6849
-                0x000000000000c19c        0xc ./drivers/fsl_lpuart.o
+                0x000000000000d31c        0xc ./drivers/fsl_lpuart.o
  .rodata.__func__.6874
-                0x000000000000c1a8       0x18 ./drivers/fsl_lpuart.o
+                0x000000000000d328       0x18 ./drivers/fsl_lpuart.o
  .rodata.g_defaultClockConfigRun
-                0x000000000000c1c0       0x20 ./board/clock_config.o
-                0x000000000000c1c0                g_defaultClockConfigRun
+                0x000000000000d340       0x20 ./board/clock_config.o
+                0x000000000000d340                g_defaultClockConfigRun
  .rodata.__func__.6656
-                0x000000000000c1e0       0x14 ./board/pin_mux.o
+                0x000000000000d360       0x14 ./board/pin_mux.o
  .rodata.str1.4
-                0x000000000000c1f4        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
- .rodata.dp_h   0x000000000000c1f8       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
- .rodata.dp_l   0x000000000000c208       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
- .rodata.bp     0x000000000000c218       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+                0x000000000000d374        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
+ .rodata.dp_h   0x000000000000d378       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+ .rodata.dp_l   0x000000000000d388       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+ .rodata.bp     0x000000000000d398       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
  .rodata.str1.4
-                0x000000000000c228        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
- *fill*         0x000000000000c22c        0x4 
- .rodata.TWO52  0x000000000000c230       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
+                0x000000000000d3a8        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+ *fill*         0x000000000000d3ac        0x4 
+ .rodata.TWO52  0x000000000000d3b0       0x10 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
  .rodata.str1.1
-                0x000000000000c240        0x2 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
- *fill*         0x000000000000c242        0x2 
+                0x000000000000d3c0        0x2 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+ *fill*         0x000000000000d3c2        0x2 
  .rodata._global_impure_ptr
-                0x000000000000c244        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
-                0x000000000000c244                _global_impure_ptr
+                0x000000000000d3c4        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                0x000000000000d3c4                _global_impure_ptr
  *(.glue_7)
  .glue_7        0x0000000000000000        0x0 linker stubs
  *(.glue_7t)
  .glue_7t       0x0000000000000000        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x000000000000c248        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .eh_frame      0x000000000000d3c8        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
  *(.init)
- .init          0x000000000000c248        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
-                0x000000000000c248                _init
- .init          0x000000000000c24c        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+ .init          0x000000000000d3c8        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+                0x000000000000d3c8                _init
+ .init          0x000000000000d3cc        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
  *(.fini)
- .fini          0x000000000000c254        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
-                0x000000000000c254                _fini
- .fini          0x000000000000c258        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
-                0x000000000000c260                . = ALIGN (0x4)
+ .fini          0x000000000000d3d4        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crti.o
+                0x000000000000d3d4                _fini
+ .fini          0x000000000000d3d8        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+                0x000000000000d3e0                . = ALIGN (0x4)
 
-.vfp11_veneer   0x000000000000c260        0x0
+.vfp11_veneer   0x000000000000d3e0        0x0
  .vfp11_veneer  0x0000000000000000        0x0 linker stubs
 
-.v4_bx          0x000000000000c260        0x0
+.v4_bx          0x000000000000d3e0        0x0
  .v4_bx         0x0000000000000000        0x0 linker stubs
 
-.iplt           0x000000000000c260        0x0
+.iplt           0x000000000000d3e0        0x0
  .iplt          0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x000000000000c260        0x8
-                0x000000000000c260                __exidx_start = .
+.ARM            0x000000000000d3e0        0x8
+                0x000000000000d3e0                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x000000000000c260        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
- .ARM.exidx     0x000000000000c268        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
+ .ARM.exidx     0x000000000000d3e0        0x8 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/crt0.o
+ .ARM.exidx     0x000000000000d3e8        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
                                           0x8 (size before relaxing)
- .ARM.exidx     0x000000000000c268        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x000000000000d3e8        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
                                           0x8 (size before relaxing)
-                0x000000000000c268                __exidx_end = .
+                0x000000000000d3e8                __exidx_end = .
 
-.rel.dyn        0x000000000000c268        0x0
+.rel.dyn        0x000000000000d3e8        0x0
  .rel.iplt      0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
 
-.ctors          0x000000000000c268        0x0
-                0x000000000000c268                __CTOR_LIST__ = .
+.ctors          0x000000000000d3e8        0x0
+                0x000000000000d3e8                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x000000000000c268                __CTOR_END__ = .
+                0x000000000000d3e8                __CTOR_END__ = .
 
-.dtors          0x000000000000c268        0x0
-                0x000000000000c268                __DTOR_LIST__ = .
+.dtors          0x000000000000d3e8        0x0
+                0x000000000000d3e8                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x000000000000c268                __DTOR_END__ = .
+                0x000000000000d3e8                __DTOR_END__ = .
 
-.preinit_array  0x000000000000c268        0x0
-                0x000000000000c268                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x000000000000d3e8        0x0
+                0x000000000000d3e8                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x000000000000c268                PROVIDE (__preinit_array_end, .)
+                0x000000000000d3e8                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x000000000000c268        0x4
-                0x000000000000c268                PROVIDE (__init_array_start, .)
+.init_array     0x000000000000d3e8        0x4
+                0x000000000000d3e8                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
- .init_array    0x000000000000c268        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
-                0x000000000000c26c                PROVIDE (__init_array_end, .)
+ .init_array    0x000000000000d3e8        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+                0x000000000000d3ec                PROVIDE (__init_array_end, .)
 
-.fini_array     0x000000000000c26c        0x4
-                0x000000000000c26c                PROVIDE (__fini_array_start, .)
+.fini_array     0x000000000000d3ec        0x4
+                0x000000000000d3ec                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x000000000000c26c        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
-                0x000000000000c270                PROVIDE (__fini_array_end, .)
-                0x000000000000c270                __etext = .
-                0x000000000000c270                __DATA_ROM = .
+ .fini_array    0x000000000000d3ec        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+                0x000000000000d3f0                PROVIDE (__fini_array_end, .)
+                0x000000000000d3f0                __etext = .
+                0x000000000000d3f0                __DATA_ROM = .
 
 .interrupts_ram
                 0x000000001fff0000        0x0
@@ -2475,7 +2605,7 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x0000000000000000                __VECTOR_RAM = DEFINED (__ram_vector_table__)?__VECTOR_RAM__:ORIGIN (m_interrupts)
                 0x0000000000000000                __RAM_VECTOR_TABLE_SIZE_BYTES = DEFINED (__ram_vector_table__)?(__interrupts_ram_end__ - __interrupts_ram_start__):0x0
 
-.data           0x000000001fff0000      0x2f4 load address 0x000000000000c270
+.data           0x000000001fff0000      0x334 load address 0x000000000000d3f0
                 0x000000001fff0000                . = ALIGN (0x4)
                 0x000000001fff0000                __DATA_RAM = .
                 0x000000001fff0000                __data_start__ = .
@@ -2550,63 +2680,66 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
  .data.s_FlexioStartCapture
                 0x000000001fff00dc        0x1 ./sources/flexio_ov7670.o
  *fill*         0x000000001fff00dd        0x3 
+ .data.TO_ASCII
+                0x000000001fff00e0       0x40 ./sources/parkingasst.o
+                0x000000001fff00e0                TO_ASCII
  .data.g_UsbDeviceDescriptor
-                0x000000001fff00e0       0x14 ./sources/usb_device_descriptor.o
-                0x000000001fff00e0                g_UsbDeviceDescriptor
+                0x000000001fff0120       0x14 ./sources/usb_device_descriptor.o
+                0x000000001fff0120                g_UsbDeviceDescriptor
  .data.g_UsbDeviceConfigurationDescriptor
-                0x000000001fff00f4       0xcc ./sources/usb_device_descriptor.o
-                0x000000001fff00f4                g_UsbDeviceConfigurationDescriptor
+                0x000000001fff0134       0xcc ./sources/usb_device_descriptor.o
+                0x000000001fff0134                g_UsbDeviceConfigurationDescriptor
  .data.g_UsbDeviceString0
-                0x000000001fff01c0        0x4 ./sources/usb_device_descriptor.o
-                0x000000001fff01c0                g_UsbDeviceString0
+                0x000000001fff0200        0x4 ./sources/usb_device_descriptor.o
+                0x000000001fff0200                g_UsbDeviceString0
  .data.g_UsbDeviceString1
-                0x000000001fff01c4       0x3c ./sources/usb_device_descriptor.o
-                0x000000001fff01c4                g_UsbDeviceString1
+                0x000000001fff0204       0x3c ./sources/usb_device_descriptor.o
+                0x000000001fff0204                g_UsbDeviceString1
  .data.g_UsbDeviceString2
-                0x000000001fff0200       0x18 ./sources/usb_device_descriptor.o
-                0x000000001fff0200                g_UsbDeviceString2
+                0x000000001fff0240       0x18 ./sources/usb_device_descriptor.o
+                0x000000001fff0240                g_UsbDeviceString2
  .data.g_UsbDeviceString3
-                0x000000001fff0218       0x2c ./sources/usb_device_descriptor.o
-                0x000000001fff0218                g_UsbDeviceString3
+                0x000000001fff0258       0x2c ./sources/usb_device_descriptor.o
+                0x000000001fff0258                g_UsbDeviceString3
  .data.g_UsbDeviceStringDescriptorLength
-                0x000000001fff0244       0x10 ./sources/usb_device_descriptor.o
-                0x000000001fff0244                g_UsbDeviceStringDescriptorLength
+                0x000000001fff0284       0x10 ./sources/usb_device_descriptor.o
+                0x000000001fff0284                g_UsbDeviceStringDescriptorLength
  .data.g_UsbDeviceStringDescriptorArray
-                0x000000001fff0254       0x10 ./sources/usb_device_descriptor.o
-                0x000000001fff0254                g_UsbDeviceStringDescriptorArray
+                0x000000001fff0294       0x10 ./sources/usb_device_descriptor.o
+                0x000000001fff0294                g_UsbDeviceStringDescriptorArray
  .data.g_UsbDeviceLanguage
-                0x000000001fff0264        0xc ./sources/usb_device_descriptor.o
-                0x000000001fff0264                g_UsbDeviceLanguage
+                0x000000001fff02a4        0xc ./sources/usb_device_descriptor.o
+                0x000000001fff02a4                g_UsbDeviceLanguage
  .data.g_UsbDeviceLanguageList
-                0x000000001fff0270       0x10 ./sources/usb_device_descriptor.o
-                0x000000001fff0270                g_UsbDeviceLanguageList
+                0x000000001fff02b0       0x10 ./sources/usb_device_descriptor.o
+                0x000000001fff02b0                g_UsbDeviceLanguageList
  .data.s_slowIrcFreq
-                0x000000001fff0280        0x4 ./drivers/fsl_clock.o
+                0x000000001fff02c0        0x4 ./drivers/fsl_clock.o
  .data.s_fastIrcFreq
-                0x000000001fff0284        0x4 ./drivers/fsl_clock.o
+                0x000000001fff02c4        0x4 ./drivers/fsl_clock.o
  .data.__fdlib_version
-                0x000000001fff0288        0x1 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_lib_ver.o)
-                0x000000001fff0288                __fdlib_version
- *fill*         0x000000001fff0289        0x3 
+                0x000000001fff02c8        0x1 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_lib_ver.o)
+                0x000000001fff02c8                __fdlib_version
+ *fill*         0x000000001fff02c9        0x3 
  .data.impure_data
-                0x000000001fff028c       0x60 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                0x000000001fff02cc       0x60 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
  .data._impure_ptr
-                0x000000001fff02ec        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
-                0x000000001fff02ec                _impure_ptr
+                0x000000001fff032c        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                0x000000001fff032c                _impure_ptr
  *(.jcr*)
- .jcr           0x000000001fff02f0        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
- .jcr           0x000000001fff02f0        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
-                0x000000001fff02f4                . = ALIGN (0x4)
-                0x000000001fff02f4                __data_end__ = .
-                0x000000000000c564                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+ .jcr           0x000000001fff0330        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
+ .jcr           0x000000001fff0330        0x4 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+                0x000000001fff0334                . = ALIGN (0x4)
+                0x000000001fff0334                __data_end__ = .
+                0x000000000000d724                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
                 0x0000000000040000                text_end = (ORIGIN (m_text) + 0x3fbf0)
                 0x0000000000000001                ASSERT ((__DATA_END <= text_end), region m_text overflowed with text and data)
                 0x0000000000000800                USB_RAM_GAP = DEFINED (__usb_ram_size__)?__usb_ram_size__:0x800
 
-.igot.plt       0x000000001fff02f4        0x0 load address 0x000000000000c564
+.igot.plt       0x000000001fff0334        0x0 load address 0x000000000000d724
  .igot.plt      0x0000000000000000        0x0 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtbegin.o
 
-.bss            0x0000000020000000    0x13800
+.bss            0x0000000020000000    0x18200
                 0x0000000020000000                . = ALIGN (0x4)
                 0x0000000020000000                __START_BSS = .
                 0x0000000020000000                __bss_start__ = .
@@ -2629,80 +2762,91 @@ LOAD /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.
                 0x0000000020012c80       0x20 ./sources/flexio_ov7670.o
  .bss.s_FlexioCameraConfig
                 0x0000000020012ca0        0x4 ./sources/flexio_ov7670.o
+ .bss.lptmrCounter
+                0x0000000020012ca4        0x4 ./sources/parkingasst.o
+                0x0000000020012ca4                lptmrCounter
+ .bss.gPrevImage
+                0x0000000020012ca8     0x4b00 ./sources/parkingasst.o
+ .bss.lastxcor.6952
+                0x00000000200177a8        0x4 ./sources/parkingasst.o
+ .bss.lastycor.6953
+                0x00000000200177ac        0x4 ./sources/parkingasst.o
+ .bss.state.6951
+                0x00000000200177b0        0x4 ./sources/parkingasst.o
  .bss.s_UsbDeviceStandardRx
-                0x0000000020012ca4        0x2 ./sources/usb_device_ch9.o
+                0x00000000200177b4        0x2 ./sources/usb_device_ch9.o
  .bss.g_UsbDeviceCurrentConfigure
-                0x0000000020012ca6        0x1 ./sources/usb_device_descriptor.o
-                0x0000000020012ca6                g_UsbDeviceCurrentConfigure
- *fill*         0x0000000020012ca7        0x1 
+                0x00000000200177b6        0x1 ./sources/usb_device_descriptor.o
+                0x00000000200177b6                g_UsbDeviceCurrentConfigure
+ *fill*         0x00000000200177b7        0x1 
  .bss.g_UsbDeviceInterface
-                0x0000000020012ca8        0x4 ./sources/usb_device_descriptor.o
-                0x0000000020012ca8                g_UsbDeviceInterface
+                0x00000000200177b8        0x4 ./sources/usb_device_descriptor.o
+                0x00000000200177b8                g_UsbDeviceInterface
  .bss.g_UsbDeviceVideoFlexioCamera
-                0x0000000020012cac       0x94 ./sources/video_camera.o
-                0x0000000020012cac                g_UsbDeviceVideoFlexioCamera
- .bss.setup.8524
-                0x0000000020012d40        0x8 ./sources/video_camera.o
- .bss.setupOut.8540
-                0x0000000020012d48       0x24 ./sources/video_camera.o
+                0x00000000200177bc       0x94 ./sources/video_camera.o
+                0x00000000200177bc                g_UsbDeviceVideoFlexioCamera
+ .bss.setup.8629
+                0x0000000020017850        0x8 ./sources/video_camera.o
+ .bss.setupOut.8645
+                0x0000000020017858       0x24 ./sources/video_camera.o
  .bss.g_xtal0Freq
-                0x0000000020012d6c        0x4 ./drivers/fsl_clock.o
-                0x0000000020012d6c                g_xtal0Freq
+                0x000000002001787c        0x4 ./drivers/fsl_clock.o
+                0x000000002001787c                g_xtal0Freq
  .bss.g_xtal32Freq
-                0x0000000020012d70        0x4 ./drivers/fsl_clock.o
-                0x0000000020012d70                g_xtal32Freq
+                0x0000000020017880        0x4 ./drivers/fsl_clock.o
+                0x0000000020017880                g_xtal32Freq
  .bss.s_EDMAHandle
-                0x0000000020012d74       0x80 ./drivers/fsl_edma.o
+                0x0000000020017884       0x80 ./drivers/fsl_edma.o
  .bss.s_flexioHandle
-                0x0000000020012df4        0x8 ./drivers/fsl_flexio.o
+                0x0000000020017904        0x8 ./drivers/fsl_flexio.o
  .bss.s_flexioType
-                0x0000000020012dfc        0x8 ./drivers/fsl_flexio.o
+                0x000000002001790c        0x8 ./drivers/fsl_flexio.o
  .bss.s_flexioIsr
-                0x0000000020012e04        0x8 ./drivers/fsl_flexio.o
+                0x0000000020017914        0x8 ./drivers/fsl_flexio.o
  .bss.s_i2cHandle
-                0x0000000020012e0c       0x10 ./drivers/fsl_i2c.o
+                0x000000002001791c       0x10 ./drivers/fsl_i2c.o
  .bss.s_i2cMasterIsr
-                0x0000000020012e1c        0x4 ./drivers/fsl_i2c.o
+                0x000000002001792c        0x4 ./drivers/fsl_i2c.o
  .bss.s_i2cSlaveIsr
-                0x0000000020012e20        0x4 ./drivers/fsl_i2c.o
+                0x0000000020017930        0x4 ./drivers/fsl_i2c.o
  .bss.s_lpuartHandle
-                0x0000000020012e24       0x14 ./drivers/fsl_lpuart.o
+                0x0000000020017934       0x14 ./drivers/fsl_lpuart.o
  .bss.s_lpuartIsr
-                0x0000000020012e38        0x4 ./drivers/fsl_lpuart.o
-                0x0000000020013000                . = ALIGN (0x200)
- *fill*         0x0000000020012e3c      0x1c4 
-                0x0000000020013000                USB_RAM_START = .
-                0x0000000020013800                . = (. + USB_RAM_GAP)
- *fill*         0x0000000020013000      0x800 
+                0x0000000020017948        0x4 ./drivers/fsl_lpuart.o
+                0x0000000020017a00                . = ALIGN (0x200)
+ *fill*         0x000000002001794c       0xb4 
+                0x0000000020017a00                USB_RAM_START = .
+                0x0000000020018200                . = (. + USB_RAM_GAP)
+ *fill*         0x0000000020017a00      0x800 
  *(COMMON)
-                0x0000000020013800                . = ALIGN (0x4)
-                0x0000000020013800                __bss_end__ = .
-                0x0000000020013800                __END_BSS = .
+                0x0000000020018200                . = ALIGN (0x4)
+                0x0000000020018200                __bss_end__ = .
+                0x0000000020018200                __END_BSS = .
 
-.heap           0x0000000020013800     0x2000
-                0x0000000020013800                . = ALIGN (0x8)
-                0x0000000020013800                __end__ = .
-                0x0000000020013800                PROVIDE (end, .)
-                0x0000000020013800                __HeapBase = .
-                0x0000000020015800                . = (. + HEAP_SIZE)
- *fill*         0x0000000020013800     0x2000 
-                0x0000000020015800                __HeapLimit = .
+.heap           0x0000000020018200     0x2000
+                0x0000000020018200                . = ALIGN (0x8)
+                0x0000000020018200                __end__ = .
+                0x0000000020018200                PROVIDE (end, .)
+                0x0000000020018200                __HeapBase = .
+                0x000000002001a200                . = (. + HEAP_SIZE)
+ *fill*         0x0000000020018200     0x2000 
+                0x000000002001a200                __HeapLimit = .
 
-.stack          0x0000000020015800      0x400
-                0x0000000020015800                . = ALIGN (0x8)
-                0x0000000020015c00                . = (. + STACK_SIZE)
- *fill*         0x0000000020015800      0x400 
+.stack          0x000000002001a200      0x400
+                0x000000002001a200                . = ALIGN (0x8)
+                0x000000002001a600                . = (. + STACK_SIZE)
+ *fill*         0x000000002001a200      0x400 
 
-m_usb_bdt       0x0000000020013000      0x200
+m_usb_bdt       0x0000000020017a00      0x200
  *(m_usb_bdt)
- m_usb_bdt      0x0000000020013000      0x200 ./usb/device/source/khci/usb_device_khci.o
-                0x0000000020013200                USB_RAM_BDT_END = .
+ m_usb_bdt      0x0000000020017a00      0x200 ./usb/device/source/khci/usb_device_khci.o
+                0x0000000020017c00                USB_RAM_BDT_END = .
 
-m_usb_global    0x0000000020013200      0x1f0
+m_usb_global    0x0000000020017c00      0x1f0
  *(m_usb_global)
- m_usb_global   0x0000000020013200       0xe4 ./usb/device/source/khci/usb_device_khci.o
- m_usb_global   0x00000000200132e4       0x50 ./usb/device/source/usb_device_dci.o
- m_usb_global   0x0000000020013334       0xbc ./osa/usb_osa_bm.o
+ m_usb_global   0x0000000020017c00       0xe4 ./usb/device/source/khci/usb_device_khci.o
+ m_usb_global   0x0000000020017ce4       0x50 ./usb/device/source/usb_device_dci.o
+ m_usb_global   0x0000000020017d34       0xbc ./osa/usb_osa_bm.o
                 0x0000000020030000                __StackTop = (ORIGIN (m_data_2) + 0x30000)
                 0x000000002002fc00                __StackLimit = (__StackTop - STACK_SIZE)
                 0x0000000020030000                PROVIDE (__stack, __StackTop)
@@ -2733,111 +2877,115 @@ m_usb_global    0x0000000020013200      0x1f0
  .ARM.attributes
                 0x00000000000001eb       0x39 ./sources/flexio_ov7670.o
  .ARM.attributes
-                0x0000000000000224       0x39 ./sources/usb_device_ch9.o
+                0x0000000000000224       0x39 ./sources/parkingasst.o
  .ARM.attributes
-                0x000000000000025d       0x39 ./sources/usb_device_descriptor.o
+                0x000000000000025d       0x39 ./sources/usb_device_ch9.o
  .ARM.attributes
-                0x0000000000000296       0x39 ./sources/video_camera.o
+                0x0000000000000296       0x39 ./sources/usb_device_descriptor.o
  .ARM.attributes
-                0x00000000000002cf       0x39 ./osa/usb_osa_bm.o
+                0x00000000000002cf       0x39 ./sources/video_camera.o
  .ARM.attributes
-                0x0000000000000308       0x39 ./drivers/fsl_clock.o
+                0x0000000000000308       0x39 ./osa/usb_osa_bm.o
  .ARM.attributes
-                0x0000000000000341       0x39 ./drivers/fsl_common.o
+                0x0000000000000341       0x39 ./drivers/fsl_clock.o
  .ARM.attributes
-                0x000000000000037a       0x39 ./drivers/fsl_dmamux.o
+                0x000000000000037a       0x39 ./drivers/fsl_common.o
  .ARM.attributes
-                0x00000000000003b3       0x39 ./drivers/fsl_edma.o
+                0x00000000000003b3       0x39 ./drivers/fsl_dmamux.o
  .ARM.attributes
-                0x00000000000003ec       0x39 ./drivers/fsl_flexio.o
+                0x00000000000003ec       0x39 ./drivers/fsl_edma.o
  .ARM.attributes
-                0x0000000000000425       0x39 ./drivers/fsl_flexio_camera.o
+                0x0000000000000425       0x39 ./drivers/fsl_flexio.o
  .ARM.attributes
-                0x000000000000045e       0x39 ./drivers/fsl_gpio.o
+                0x000000000000045e       0x39 ./drivers/fsl_flexio_camera.o
  .ARM.attributes
-                0x0000000000000497       0x39 ./drivers/fsl_i2c.o
+                0x0000000000000497       0x39 ./drivers/fsl_gpio.o
  .ARM.attributes
-                0x00000000000004d0       0x39 ./drivers/fsl_lpuart.o
+                0x00000000000004d0       0x39 ./drivers/fsl_i2c.o
  .ARM.attributes
-                0x0000000000000509       0x39 ./board/board.o
+                0x0000000000000509       0x39 ./drivers/fsl_lptmr.o
  .ARM.attributes
-                0x0000000000000542       0x39 ./board/clock_config.o
+                0x0000000000000542       0x39 ./drivers/fsl_lpuart.o
  .ARM.attributes
-                0x000000000000057b       0x39 ./board/pin_mux.o
+                0x000000000000057b       0x39 ./board/board.o
  .ARM.attributes
-                0x00000000000005b4       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
+                0x00000000000005b4       0x39 ./board/clock_config.o
  .ARM.attributes
-                0x00000000000005e8       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
+                0x00000000000005ed       0x39 ./board/pin_mux.o
  .ARM.attributes
-                0x000000000000061c       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+                0x0000000000000626       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
  .ARM.attributes
-                0x0000000000000650       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
+                0x000000000000065a       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
  .ARM.attributes
-                0x0000000000000684       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
+                0x000000000000068e       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
  .ARM.attributes
-                0x00000000000006b8       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
+                0x00000000000006c2       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
  .ARM.attributes
-                0x00000000000006ec       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
+                0x00000000000006f6       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
  .ARM.attributes
-                0x0000000000000720       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_lib_ver.o)
+                0x000000000000072a       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
  .ARM.attributes
-                0x0000000000000754       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
+                0x000000000000075e       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
  .ARM.attributes
-                0x0000000000000788       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
+                0x0000000000000792       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_lib_ver.o)
  .ARM.attributes
-                0x00000000000007bc       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
+                0x00000000000007c6       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
  .ARM.attributes
-                0x00000000000007f0       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
+                0x00000000000007fa       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
  .ARM.attributes
-                0x0000000000000824       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
+                0x000000000000082e       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
  .ARM.attributes
-                0x0000000000000858       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
+                0x0000000000000862       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
  .ARM.attributes
-                0x000000000000088c       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+                0x0000000000000896       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
  .ARM.attributes
-                0x00000000000008c0       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
+                0x00000000000008ca       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
  .ARM.attributes
-                0x00000000000008f4       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+                0x00000000000008fe       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
  .ARM.attributes
-                0x0000000000000928       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+                0x0000000000000932       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-impure.o)
  .ARM.attributes
-                0x000000000000095c       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+                0x0000000000000966       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
  .ARM.attributes
-                0x0000000000000990       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_addsubdf3.o)
+                0x000000000000099a       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
  .ARM.attributes
-                0x00000000000009b2       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_muldivdf3.o)
+                0x00000000000009ce       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
  .ARM.attributes
-                0x00000000000009d4       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_cmpdf2.o)
+                0x0000000000000a02       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x00000000000009f6       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_fixdfsi.o)
+                0x0000000000000a24       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x0000000000000a18       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_fixunsdfsi.o)
+                0x0000000000000a46       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_cmpdf2.o)
  .ARM.attributes
-                0x0000000000000a3a       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_aeabi_ldivmod.o)
+                0x0000000000000a68       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_fixdfsi.o)
  .ARM.attributes
-                0x0000000000000a5c       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
+                0x0000000000000a8a       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_arm_fixunsdfsi.o)
  .ARM.attributes
-                0x0000000000000a7e       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixdfdi.o)
+                0x0000000000000aac       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_aeabi_ldivmod.o)
  .ARM.attributes
-                0x0000000000000ab2       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixunsdfdi.o)
+                0x0000000000000ace       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x0000000000000ae6       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(bpabi.o)
+                0x0000000000000af0       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixdfdi.o)
  .ARM.attributes
-                0x0000000000000b1a       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
+                0x0000000000000b24       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixunsdfdi.o)
  .ARM.attributes
-                0x0000000000000b3c       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
+                0x0000000000000b58       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(bpabi.o)
  .ARM.attributes
-                0x0000000000000b70       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+                0x0000000000000b8c       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x0000000000000ba4       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+                0x0000000000000bae       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
  .ARM.attributes
-                0x0000000000000bd8       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+                0x0000000000000be2       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
  .ARM.attributes
-                0x0000000000000c0c       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
+                0x0000000000000c16       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .ARM.attributes
+                0x0000000000000c4a       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtend.o
+ .ARM.attributes
+                0x0000000000000c7e       0x22 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/crtn.o
                 0x0000000000000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data_2 overflowed with stack and heap)
 OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
 
-.debug_info     0x0000000000000000    0x16502
+.debug_info     0x0000000000000000    0x18636
  .debug_info    0x0000000000000000      0xd6d ./utilities/fsl_debug_console.o
  .debug_info    0x0000000000000d6d     0x1385 ./usb/device/source/khci/usb_device_khci.o
  .debug_info    0x00000000000020f2      0xd6c ./usb/device/source/usb_device_dci.o
@@ -2846,24 +2994,26 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_info    0x000000000000356e      0x3ed ./sources/ov7670/fsl_sccb_master_driver.o
  .debug_info    0x000000000000395b     0x14a7 ./sources/ov7670/ov7670_driver.o
  .debug_info    0x0000000000004e02     0x1ce7 ./sources/flexio_ov7670.o
- .debug_info    0x0000000000006ae9      0x96c ./sources/usb_device_ch9.o
- .debug_info    0x0000000000007455      0x8bc ./sources/usb_device_descriptor.o
- .debug_info    0x0000000000007d11     0x2174 ./sources/video_camera.o
- .debug_info    0x0000000000009e85      0x943 ./osa/usb_osa_bm.o
- .debug_info    0x000000000000a7c8     0x1f72 ./drivers/fsl_clock.o
- .debug_info    0x000000000000c73a      0x678 ./drivers/fsl_common.o
- .debug_info    0x000000000000cdb2      0x58e ./drivers/fsl_dmamux.o
- .debug_info    0x000000000000d340     0x23ad ./drivers/fsl_edma.o
- .debug_info    0x000000000000f6ed     0x107c ./drivers/fsl_flexio.o
- .debug_info    0x0000000000010769      0xee9 ./drivers/fsl_flexio_camera.o
- .debug_info    0x0000000000011652      0x531 ./drivers/fsl_gpio.o
- .debug_info    0x0000000000011b83     0x1d06 ./drivers/fsl_i2c.o
- .debug_info    0x0000000000013889     0x1947 ./drivers/fsl_lpuart.o
- .debug_info    0x00000000000151d0      0x35f ./board/board.o
- .debug_info    0x000000000001552f      0x8e0 ./board/clock_config.o
- .debug_info    0x0000000000015e0f      0x6f3 ./board/pin_mux.o
+ .debug_info    0x0000000000006ae9     0x1585 ./sources/parkingasst.o
+ .debug_info    0x000000000000806e      0x96c ./sources/usb_device_ch9.o
+ .debug_info    0x00000000000089da      0x8bc ./sources/usb_device_descriptor.o
+ .debug_info    0x0000000000009296     0x256b ./sources/video_camera.o
+ .debug_info    0x000000000000b801      0x943 ./osa/usb_osa_bm.o
+ .debug_info    0x000000000000c144     0x1f72 ./drivers/fsl_clock.o
+ .debug_info    0x000000000000e0b6      0x678 ./drivers/fsl_common.o
+ .debug_info    0x000000000000e72e      0x58e ./drivers/fsl_dmamux.o
+ .debug_info    0x000000000000ecbc     0x23ad ./drivers/fsl_edma.o
+ .debug_info    0x0000000000011069     0x107c ./drivers/fsl_flexio.o
+ .debug_info    0x00000000000120e5      0xee9 ./drivers/fsl_flexio_camera.o
+ .debug_info    0x0000000000012fce      0x531 ./drivers/fsl_gpio.o
+ .debug_info    0x00000000000134ff     0x1d06 ./drivers/fsl_i2c.o
+ .debug_info    0x0000000000015205      0x7b8 ./drivers/fsl_lptmr.o
+ .debug_info    0x00000000000159bd     0x1947 ./drivers/fsl_lpuart.o
+ .debug_info    0x0000000000017304      0x35f ./board/board.o
+ .debug_info    0x0000000000017663      0x8e0 ./board/clock_config.o
+ .debug_info    0x0000000000017f43      0x6f3 ./board/pin_mux.o
 
-.debug_abbrev   0x0000000000000000     0x2eed
+.debug_abbrev   0x0000000000000000     0x340a
  .debug_abbrev  0x0000000000000000      0x257 ./utilities/fsl_debug_console.o
  .debug_abbrev  0x0000000000000257      0x2a4 ./usb/device/source/khci/usb_device_khci.o
  .debug_abbrev  0x00000000000004fb      0x1a7 ./usb/device/source/usb_device_dci.o
@@ -2872,24 +3022,26 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_abbrev  0x00000000000007cd      0x125 ./sources/ov7670/fsl_sccb_master_driver.o
  .debug_abbrev  0x00000000000008f2      0x1b7 ./sources/ov7670/ov7670_driver.o
  .debug_abbrev  0x0000000000000aa9      0x29b ./sources/flexio_ov7670.o
- .debug_abbrev  0x0000000000000d44      0x123 ./sources/usb_device_ch9.o
- .debug_abbrev  0x0000000000000e67      0x12c ./sources/usb_device_descriptor.o
- .debug_abbrev  0x0000000000000f93      0x399 ./sources/video_camera.o
- .debug_abbrev  0x000000000000132c      0x1bd ./osa/usb_osa_bm.o
- .debug_abbrev  0x00000000000014e9      0x2c6 ./drivers/fsl_clock.o
- .debug_abbrev  0x00000000000017af      0x165 ./drivers/fsl_common.o
- .debug_abbrev  0x0000000000001914      0x167 ./drivers/fsl_dmamux.o
- .debug_abbrev  0x0000000000001a7b      0x3a1 ./drivers/fsl_edma.o
- .debug_abbrev  0x0000000000001e1c      0x22d ./drivers/fsl_flexio.o
- .debug_abbrev  0x0000000000002049      0x1fe ./drivers/fsl_flexio_camera.o
- .debug_abbrev  0x0000000000002247      0x192 ./drivers/fsl_gpio.o
- .debug_abbrev  0x00000000000023d9      0x310 ./drivers/fsl_i2c.o
- .debug_abbrev  0x00000000000026e9      0x36f ./drivers/fsl_lpuart.o
- .debug_abbrev  0x0000000000002a58      0x117 ./board/board.o
- .debug_abbrev  0x0000000000002b6f      0x1b3 ./board/clock_config.o
- .debug_abbrev  0x0000000000002d22      0x1cb ./board/pin_mux.o
+ .debug_abbrev  0x0000000000000d44      0x364 ./sources/parkingasst.o
+ .debug_abbrev  0x00000000000010a8      0x123 ./sources/usb_device_ch9.o
+ .debug_abbrev  0x00000000000011cb      0x12c ./sources/usb_device_descriptor.o
+ .debug_abbrev  0x00000000000012f7      0x3cd ./sources/video_camera.o
+ .debug_abbrev  0x00000000000016c4      0x1bd ./osa/usb_osa_bm.o
+ .debug_abbrev  0x0000000000001881      0x2c6 ./drivers/fsl_clock.o
+ .debug_abbrev  0x0000000000001b47      0x165 ./drivers/fsl_common.o
+ .debug_abbrev  0x0000000000001cac      0x167 ./drivers/fsl_dmamux.o
+ .debug_abbrev  0x0000000000001e13      0x3a1 ./drivers/fsl_edma.o
+ .debug_abbrev  0x00000000000021b4      0x22d ./drivers/fsl_flexio.o
+ .debug_abbrev  0x00000000000023e1      0x1fe ./drivers/fsl_flexio_camera.o
+ .debug_abbrev  0x00000000000025df      0x192 ./drivers/fsl_gpio.o
+ .debug_abbrev  0x0000000000002771      0x310 ./drivers/fsl_i2c.o
+ .debug_abbrev  0x0000000000002a81      0x185 ./drivers/fsl_lptmr.o
+ .debug_abbrev  0x0000000000002c06      0x36f ./drivers/fsl_lpuart.o
+ .debug_abbrev  0x0000000000002f75      0x117 ./board/board.o
+ .debug_abbrev  0x000000000000308c      0x1b3 ./board/clock_config.o
+ .debug_abbrev  0x000000000000323f      0x1cb ./board/pin_mux.o
 
-.debug_aranges  0x0000000000000000     0x10e0
+.debug_aranges  0x0000000000000000     0x1268
  .debug_aranges
                 0x0000000000000000       0x98 ./utilities/fsl_debug_console.o
  .debug_aranges
@@ -2907,39 +3059,43 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_aranges
                 0x0000000000000328       0x98 ./sources/flexio_ov7670.o
  .debug_aranges
-                0x00000000000003c0       0x78 ./sources/usb_device_ch9.o
+                0x00000000000003c0      0x100 ./sources/parkingasst.o
  .debug_aranges
-                0x0000000000000438       0x48 ./sources/usb_device_descriptor.o
+                0x00000000000004c0       0x78 ./sources/usb_device_ch9.o
  .debug_aranges
-                0x0000000000000480      0x150 ./sources/video_camera.o
+                0x0000000000000538       0x48 ./sources/usb_device_descriptor.o
  .debug_aranges
-                0x00000000000005d0       0xd0 ./osa/usb_osa_bm.o
+                0x0000000000000580      0x190 ./sources/video_camera.o
  .debug_aranges
-                0x00000000000006a0      0x1f8 ./drivers/fsl_clock.o
+                0x0000000000000710       0xd0 ./osa/usb_osa_bm.o
  .debug_aranges
-                0x0000000000000898       0x28 ./drivers/fsl_common.o
+                0x00000000000007e0      0x1f8 ./drivers/fsl_clock.o
  .debug_aranges
-                0x00000000000008c0       0x40 ./drivers/fsl_dmamux.o
+                0x00000000000009d8       0x28 ./drivers/fsl_common.o
  .debug_aranges
-                0x0000000000000900      0x2c8 ./drivers/fsl_edma.o
+                0x0000000000000a00       0x40 ./drivers/fsl_dmamux.o
  .debug_aranges
-                0x0000000000000bc8       0x98 ./drivers/fsl_flexio.o
+                0x0000000000000a40      0x2c8 ./drivers/fsl_edma.o
  .debug_aranges
-                0x0000000000000c60       0x98 ./drivers/fsl_flexio_camera.o
+                0x0000000000000d08       0x98 ./drivers/fsl_flexio.o
  .debug_aranges
-                0x0000000000000cf8       0x40 ./drivers/fsl_gpio.o
+                0x0000000000000da0       0x98 ./drivers/fsl_flexio_camera.o
  .debug_aranges
-                0x0000000000000d38      0x180 ./drivers/fsl_i2c.o
+                0x0000000000000e38       0x40 ./drivers/fsl_gpio.o
  .debug_aranges
-                0x0000000000000eb8      0x170 ./drivers/fsl_lpuart.o
+                0x0000000000000e78      0x180 ./drivers/fsl_i2c.o
  .debug_aranges
-                0x0000000000001028       0x28 ./board/board.o
+                0x0000000000000ff8       0x48 ./drivers/fsl_lptmr.o
  .debug_aranges
-                0x0000000000001050       0x50 ./board/clock_config.o
+                0x0000000000001040      0x170 ./drivers/fsl_lpuart.o
  .debug_aranges
-                0x00000000000010a0       0x40 ./board/pin_mux.o
+                0x00000000000011b0       0x28 ./board/board.o
+ .debug_aranges
+                0x00000000000011d8       0x50 ./board/clock_config.o
+ .debug_aranges
+                0x0000000000001228       0x40 ./board/pin_mux.o
 
-.debug_ranges   0x0000000000000000      0xf50
+.debug_ranges   0x0000000000000000     0x10b8
  .debug_ranges  0x0000000000000000       0x88 ./utilities/fsl_debug_console.o
  .debug_ranges  0x0000000000000088       0x90 ./usb/device/source/khci/usb_device_khci.o
  .debug_ranges  0x0000000000000118       0xb8 ./usb/device/source/usb_device_dci.o
@@ -2947,24 +3103,26 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_ranges  0x00000000000001e8       0x20 ./sources/ov7670/fsl_sccb_master_driver.o
  .debug_ranges  0x0000000000000208       0xa0 ./sources/ov7670/ov7670_driver.o
  .debug_ranges  0x00000000000002a8       0x88 ./sources/flexio_ov7670.o
- .debug_ranges  0x0000000000000330       0x68 ./sources/usb_device_ch9.o
- .debug_ranges  0x0000000000000398       0x38 ./sources/usb_device_descriptor.o
- .debug_ranges  0x00000000000003d0      0x140 ./sources/video_camera.o
- .debug_ranges  0x0000000000000510       0xc0 ./osa/usb_osa_bm.o
- .debug_ranges  0x00000000000005d0      0x1e8 ./drivers/fsl_clock.o
- .debug_ranges  0x00000000000007b8       0x18 ./drivers/fsl_common.o
- .debug_ranges  0x00000000000007d0       0x30 ./drivers/fsl_dmamux.o
- .debug_ranges  0x0000000000000800      0x2b8 ./drivers/fsl_edma.o
- .debug_ranges  0x0000000000000ab8       0x88 ./drivers/fsl_flexio.o
- .debug_ranges  0x0000000000000b40       0x88 ./drivers/fsl_flexio_camera.o
- .debug_ranges  0x0000000000000bc8       0x30 ./drivers/fsl_gpio.o
- .debug_ranges  0x0000000000000bf8      0x170 ./drivers/fsl_i2c.o
- .debug_ranges  0x0000000000000d68      0x160 ./drivers/fsl_lpuart.o
- .debug_ranges  0x0000000000000ec8       0x18 ./board/board.o
- .debug_ranges  0x0000000000000ee0       0x40 ./board/clock_config.o
- .debug_ranges  0x0000000000000f20       0x30 ./board/pin_mux.o
+ .debug_ranges  0x0000000000000330       0xf0 ./sources/parkingasst.o
+ .debug_ranges  0x0000000000000420       0x68 ./sources/usb_device_ch9.o
+ .debug_ranges  0x0000000000000488       0x38 ./sources/usb_device_descriptor.o
+ .debug_ranges  0x00000000000004c0      0x180 ./sources/video_camera.o
+ .debug_ranges  0x0000000000000640       0xc0 ./osa/usb_osa_bm.o
+ .debug_ranges  0x0000000000000700      0x1e8 ./drivers/fsl_clock.o
+ .debug_ranges  0x00000000000008e8       0x18 ./drivers/fsl_common.o
+ .debug_ranges  0x0000000000000900       0x30 ./drivers/fsl_dmamux.o
+ .debug_ranges  0x0000000000000930      0x2b8 ./drivers/fsl_edma.o
+ .debug_ranges  0x0000000000000be8       0x88 ./drivers/fsl_flexio.o
+ .debug_ranges  0x0000000000000c70       0x88 ./drivers/fsl_flexio_camera.o
+ .debug_ranges  0x0000000000000cf8       0x30 ./drivers/fsl_gpio.o
+ .debug_ranges  0x0000000000000d28      0x170 ./drivers/fsl_i2c.o
+ .debug_ranges  0x0000000000000e98       0x38 ./drivers/fsl_lptmr.o
+ .debug_ranges  0x0000000000000ed0      0x160 ./drivers/fsl_lpuart.o
+ .debug_ranges  0x0000000000001030       0x18 ./board/board.o
+ .debug_ranges  0x0000000000001048       0x40 ./board/clock_config.o
+ .debug_ranges  0x0000000000001088       0x30 ./board/pin_mux.o
 
-.debug_line     0x0000000000000000     0x6c2a
+.debug_line     0x0000000000000000     0x76fe
  .debug_line    0x0000000000000000      0x775 ./utilities/fsl_debug_console.o
  .debug_line    0x0000000000000775      0x581 ./usb/device/source/khci/usb_device_khci.o
  .debug_line    0x0000000000000cf6      0x43e ./usb/device/source/usb_device_dci.o
@@ -2973,24 +3131,26 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_line    0x0000000000001475      0x2ac ./sources/ov7670/fsl_sccb_master_driver.o
  .debug_line    0x0000000000001721      0x42b ./sources/ov7670/ov7670_driver.o
  .debug_line    0x0000000000001b4c      0x3f6 ./sources/flexio_ov7670.o
- .debug_line    0x0000000000001f42      0x3bb ./sources/usb_device_ch9.o
- .debug_line    0x00000000000022fd      0x257 ./sources/usb_device_descriptor.o
- .debug_line    0x0000000000002554      0x9a7 ./sources/video_camera.o
- .debug_line    0x0000000000002efb      0x3fd ./osa/usb_osa_bm.o
- .debug_line    0x00000000000032f8      0x996 ./drivers/fsl_clock.o
- .debug_line    0x0000000000003c8e      0x217 ./drivers/fsl_common.o
- .debug_line    0x0000000000003ea5      0x1ec ./drivers/fsl_dmamux.o
- .debug_line    0x0000000000004091      0xb98 ./drivers/fsl_edma.o
- .debug_line    0x0000000000004c29      0x370 ./drivers/fsl_flexio.o
- .debug_line    0x0000000000004f99      0x333 ./drivers/fsl_flexio_camera.o
- .debug_line    0x00000000000052cc      0x209 ./drivers/fsl_gpio.o
- .debug_line    0x00000000000054d5      0x8e7 ./drivers/fsl_i2c.o
- .debug_line    0x0000000000005dbc      0x7da ./drivers/fsl_lpuart.o
- .debug_line    0x0000000000006596      0x1d4 ./board/board.o
- .debug_line    0x000000000000676a      0x279 ./board/clock_config.o
- .debug_line    0x00000000000069e3      0x247 ./board/pin_mux.o
+ .debug_line    0x0000000000001f42      0x679 ./sources/parkingasst.o
+ .debug_line    0x00000000000025bb      0x3bb ./sources/usb_device_ch9.o
+ .debug_line    0x0000000000002976      0x257 ./sources/usb_device_descriptor.o
+ .debug_line    0x0000000000002bcd      0xbd3 ./sources/video_camera.o
+ .debug_line    0x00000000000037a0      0x3fd ./osa/usb_osa_bm.o
+ .debug_line    0x0000000000003b9d      0x996 ./drivers/fsl_clock.o
+ .debug_line    0x0000000000004533      0x217 ./drivers/fsl_common.o
+ .debug_line    0x000000000000474a      0x1ec ./drivers/fsl_dmamux.o
+ .debug_line    0x0000000000004936      0xb98 ./drivers/fsl_edma.o
+ .debug_line    0x00000000000054ce      0x370 ./drivers/fsl_flexio.o
+ .debug_line    0x000000000000583e      0x333 ./drivers/fsl_flexio_camera.o
+ .debug_line    0x0000000000005b71      0x209 ./drivers/fsl_gpio.o
+ .debug_line    0x0000000000005d7a      0x8e7 ./drivers/fsl_i2c.o
+ .debug_line    0x0000000000006661      0x22d ./drivers/fsl_lptmr.o
+ .debug_line    0x000000000000688e      0x7da ./drivers/fsl_lpuart.o
+ .debug_line    0x0000000000007068      0x1d4 ./board/board.o
+ .debug_line    0x000000000000723c      0x279 ./board/clock_config.o
+ .debug_line    0x00000000000074b5      0x249 ./board/pin_mux.o
 
-.debug_str      0x0000000000000000     0xbaa8
+.debug_str      0x0000000000000000     0xc2d9
  .debug_str     0x0000000000000000      0xce1 ./utilities/fsl_debug_console.o
                                         0xdb8 (size before relaxing)
  .debug_str     0x0000000000000ce1     0x118f ./usb/device/source/khci/usb_device_khci.o
@@ -3005,37 +3165,41 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
                                        0x18c0 (size before relaxing)
  .debug_str     0x0000000000003c83     0x15a8 ./sources/flexio_ov7670.o
                                        0x2220 (size before relaxing)
- .debug_str     0x000000000000522b      0x319 ./sources/usb_device_ch9.o
+ .debug_str     0x000000000000522b      0x92a ./sources/parkingasst.o
+                                       0x187d (size before relaxing)
+ .debug_str     0x0000000000005b55      0x319 ./sources/usb_device_ch9.o
                                         0xb42 (size before relaxing)
- .debug_str     0x0000000000005544      0x5f7 ./sources/usb_device_descriptor.o
+ .debug_str     0x0000000000005e6e      0x5f7 ./sources/usb_device_descriptor.o
                                         0xcfa (size before relaxing)
- .debug_str     0x0000000000005b3b      0xb09 ./sources/video_camera.o
-                                       0x204f (size before relaxing)
- .debug_str     0x0000000000006644      0x406 ./osa/usb_osa_bm.o
+ .debug_str     0x0000000000006465      0xaf1 ./sources/video_camera.o
+                                       0x2165 (size before relaxing)
+ .debug_str     0x0000000000006f56      0x400 ./osa/usb_osa_bm.o
                                         0x683 (size before relaxing)
- .debug_str     0x0000000000006a4a     0x10e2 ./drivers/fsl_clock.o
+ .debug_str     0x0000000000007356     0x10e2 ./drivers/fsl_clock.o
                                        0x1c81 (size before relaxing)
- .debug_str     0x0000000000007b2c      0x11d ./drivers/fsl_common.o
+ .debug_str     0x0000000000008438      0x11d ./drivers/fsl_common.o
                                         0xa52 (size before relaxing)
- .debug_str     0x0000000000007c49       0xc6 ./drivers/fsl_dmamux.o
+ .debug_str     0x0000000000008555       0xc6 ./drivers/fsl_dmamux.o
                                         0x983 (size before relaxing)
- .debug_str     0x0000000000007d0f      0xc15 ./drivers/fsl_edma.o
+ .debug_str     0x000000000000861b      0xc15 ./drivers/fsl_edma.o
                                        0x231f (size before relaxing)
- .debug_str     0x0000000000008924     0x109f ./drivers/fsl_flexio.o
+ .debug_str     0x0000000000009230     0x107f ./drivers/fsl_flexio.o
                                        0x1cee (size before relaxing)
- .debug_str     0x00000000000099c3      0x204 ./drivers/fsl_flexio_camera.o
+ .debug_str     0x000000000000a2af      0x204 ./drivers/fsl_flexio_camera.o
                                        0x1913 (size before relaxing)
- .debug_str     0x0000000000009bc7       0xf9 ./drivers/fsl_gpio.o
+ .debug_str     0x000000000000a4b3       0xf9 ./drivers/fsl_gpio.o
                                         0x796 (size before relaxing)
- .debug_str     0x0000000000009cc0      0x9f2 ./drivers/fsl_i2c.o
+ .debug_str     0x000000000000a5ac      0x9ed ./drivers/fsl_i2c.o
                                        0x1d0a (size before relaxing)
- .debug_str     0x000000000000a6b2      0xb7f ./drivers/fsl_lpuart.o
+ .debug_str     0x000000000000af99       0xcb ./drivers/fsl_lptmr.o
+                                        0xdbe (size before relaxing)
+ .debug_str     0x000000000000b064      0xb7f ./drivers/fsl_lpuart.o
                                        0x1e1d (size before relaxing)
- .debug_str     0x000000000000b231       0xbd ./board/board.o
+ .debug_str     0x000000000000bbe3       0xbd ./board/board.o
                                         0x421 (size before relaxing)
- .debug_str     0x000000000000b2ee      0x353 ./board/clock_config.o
+ .debug_str     0x000000000000bca0      0x353 ./board/clock_config.o
                                         0xd70 (size before relaxing)
- .debug_str     0x000000000000b641      0x467 ./board/pin_mux.o
+ .debug_str     0x000000000000bff3      0x2e6 ./board/pin_mux.o
                                         0xa41 (size before relaxing)
 
 .comment        0x0000000000000000       0x70
@@ -3047,6 +3211,7 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .comment       0x0000000000000000       0x71 ./sources/ov7670/fsl_sccb_master_driver.o
  .comment       0x0000000000000000       0x71 ./sources/ov7670/ov7670_driver.o
  .comment       0x0000000000000000       0x71 ./sources/flexio_ov7670.o
+ .comment       0x0000000000000000       0x71 ./sources/parkingasst.o
  .comment       0x0000000000000000       0x71 ./sources/usb_device_ch9.o
  .comment       0x0000000000000000       0x71 ./sources/usb_device_descriptor.o
  .comment       0x0000000000000000       0x71 ./sources/video_camera.o
@@ -3059,12 +3224,13 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .comment       0x0000000000000000       0x71 ./drivers/fsl_flexio_camera.o
  .comment       0x0000000000000000       0x71 ./drivers/fsl_gpio.o
  .comment       0x0000000000000000       0x71 ./drivers/fsl_i2c.o
+ .comment       0x0000000000000000       0x71 ./drivers/fsl_lptmr.o
  .comment       0x0000000000000000       0x71 ./drivers/fsl_lpuart.o
  .comment       0x0000000000000000       0x71 ./board/board.o
  .comment       0x0000000000000000       0x71 ./board/clock_config.o
  .comment       0x0000000000000000       0x71 ./board/pin_mux.o
 
-.debug_frame    0x0000000000000000     0x3c50
+.debug_frame    0x0000000000000000     0x417c
  .debug_frame   0x0000000000000000      0x214 ./utilities/fsl_debug_console.o
  .debug_frame   0x0000000000000214      0x228 ./usb/device/source/khci/usb_device_khci.o
  .debug_frame   0x000000000000043c      0x2c8 ./usb/device/source/usb_device_dci.o
@@ -3072,42 +3238,44 @@ OUTPUT(dev_video_flexio_ov7670_lite_bm_frdmk82f.elf elf32-littlearm)
  .debug_frame   0x0000000000000748       0x6c ./sources/ov7670/fsl_sccb_master_driver.o
  .debug_frame   0x00000000000007b4      0x26c ./sources/ov7670/ov7670_driver.o
  .debug_frame   0x0000000000000a20      0x200 ./sources/flexio_ov7670.o
- .debug_frame   0x0000000000000c20      0x190 ./sources/usb_device_ch9.o
- .debug_frame   0x0000000000000db0       0xc0 ./sources/usb_device_descriptor.o
- .debug_frame   0x0000000000000e70      0x488 ./sources/video_camera.o
- .debug_frame   0x00000000000012f8      0x2d0 ./osa/usb_osa_bm.o
- .debug_frame   0x00000000000015c8      0x6e4 ./drivers/fsl_clock.o
- .debug_frame   0x0000000000001cac       0x4c ./drivers/fsl_common.o
- .debug_frame   0x0000000000001cf8       0xa8 ./drivers/fsl_dmamux.o
- .debug_frame   0x0000000000001da0      0x9f8 ./drivers/fsl_edma.o
- .debug_frame   0x0000000000002798      0x1ec ./drivers/fsl_flexio.o
- .debug_frame   0x0000000000002984      0x1ec ./drivers/fsl_flexio_camera.o
- .debug_frame   0x0000000000002b70       0xac ./drivers/fsl_gpio.o
- .debug_frame   0x0000000000002c1c      0x570 ./drivers/fsl_i2c.o
- .debug_frame   0x000000000000318c      0x504 ./drivers/fsl_lpuart.o
- .debug_frame   0x0000000000003690       0x4c ./board/board.o
- .debug_frame   0x00000000000036dc       0xd0 ./board/clock_config.o
- .debug_frame   0x00000000000037ac       0xa4 ./board/pin_mux.o
- .debug_frame   0x0000000000003850       0x30 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
- .debug_frame   0x0000000000003880       0x40 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
- .debug_frame   0x00000000000038c0       0x44 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
- .debug_frame   0x0000000000003904       0x3c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
- .debug_frame   0x0000000000003940       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
- .debug_frame   0x0000000000003960       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
- .debug_frame   0x0000000000003980       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
- .debug_frame   0x00000000000039a8       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
- .debug_frame   0x00000000000039c8       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
- .debug_frame   0x00000000000039e8       0x30 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
- .debug_frame   0x0000000000003a18       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
- .debug_frame   0x0000000000003a44       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
- .debug_frame   0x0000000000003a6c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
- .debug_frame   0x0000000000003a8c       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
- .debug_frame   0x0000000000003ab4       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
- .debug_frame   0x0000000000003ae0       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
- .debug_frame   0x0000000000003b00       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
- .debug_frame   0x0000000000003b20       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixdfdi.o)
- .debug_frame   0x0000000000003b4c       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixunsdfdi.o)
- .debug_frame   0x0000000000003b78       0x50 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(bpabi.o)
- .debug_frame   0x0000000000003bc8       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
- .debug_frame   0x0000000000003bfc       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
- .debug_frame   0x0000000000003c30       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)
+ .debug_frame   0x0000000000000c20      0x36c ./sources/parkingasst.o
+ .debug_frame   0x0000000000000f8c      0x190 ./sources/usb_device_ch9.o
+ .debug_frame   0x000000000000111c       0xc0 ./sources/usb_device_descriptor.o
+ .debug_frame   0x00000000000011dc      0x580 ./sources/video_camera.o
+ .debug_frame   0x000000000000175c      0x2d0 ./osa/usb_osa_bm.o
+ .debug_frame   0x0000000000001a2c      0x6e4 ./drivers/fsl_clock.o
+ .debug_frame   0x0000000000002110       0x4c ./drivers/fsl_common.o
+ .debug_frame   0x000000000000215c       0xa8 ./drivers/fsl_dmamux.o
+ .debug_frame   0x0000000000002204      0x9f8 ./drivers/fsl_edma.o
+ .debug_frame   0x0000000000002bfc      0x1ec ./drivers/fsl_flexio.o
+ .debug_frame   0x0000000000002de8      0x1ec ./drivers/fsl_flexio_camera.o
+ .debug_frame   0x0000000000002fd4       0xac ./drivers/fsl_gpio.o
+ .debug_frame   0x0000000000003080      0x570 ./drivers/fsl_i2c.o
+ .debug_frame   0x00000000000035f0       0xc8 ./drivers/fsl_lptmr.o
+ .debug_frame   0x00000000000036b8      0x504 ./drivers/fsl_lpuart.o
+ .debug_frame   0x0000000000003bbc       0x4c ./board/board.o
+ .debug_frame   0x0000000000003c08       0xd0 ./board/clock_config.o
+ .debug_frame   0x0000000000003cd8       0xa4 ./board/pin_mux.o
+ .debug_frame   0x0000000000003d7c       0x30 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_modf.o)
+ .debug_frame   0x0000000000003dac       0x40 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-w_pow.o)
+ .debug_frame   0x0000000000003dec       0x44 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_pow.o)
+ .debug_frame   0x0000000000003e30       0x3c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-e_sqrt.o)
+ .debug_frame   0x0000000000003e6c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fabs.o)
+ .debug_frame   0x0000000000003e8c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_finite.o)
+ .debug_frame   0x0000000000003eac       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x0000000000003ed4       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x0000000000003ef4       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_nan.o)
+ .debug_frame   0x0000000000003f14       0x30 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_rint.o)
+ .debug_frame   0x0000000000003f44       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_scalbn.o)
+ .debug_frame   0x0000000000003f70       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libm.a(lib_a-s_copysign.o)
+ .debug_frame   0x0000000000003f98       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-errno.o)
+ .debug_frame   0x0000000000003fb8       0x28 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-exit.o)
+ .debug_frame   0x0000000000003fe0       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-init.o)
+ .debug_frame   0x000000000000400c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-memset.o)
+ .debug_frame   0x000000000000402c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libg_s.a(lib_a-strlen.o)
+ .debug_frame   0x000000000000404c       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixdfdi.o)
+ .debug_frame   0x0000000000004078       0x2c /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_fixunsdfdi.o)
+ .debug_frame   0x00000000000040a4       0x50 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(bpabi.o)
+ .debug_frame   0x00000000000040f4       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_divdi3.o)
+ .debug_frame   0x0000000000004128       0x34 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7e-m/fpu/libgcc.a(_udivdi3.o)
+ .debug_frame   0x000000000000415c       0x20 /Applications/KDS_v3.app/Contents/toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7e-m/fpu/libnosys.a(_exit.o)

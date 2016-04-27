@@ -171,6 +171,16 @@
 			<locationURI>PARENT-6-PROJECT_LOC/devices/MK82F25615/drivers/fsl_i2c.h</locationURI>
 		</link>
 		<link>
+			<name>drivers/fsl_lptmr.c</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/devices/MK82F25615/drivers/fsl_lptmr.c</locationURI>
+		</link>
+		<link>
+			<name>drivers/fsl_lptmr.h</name>
+			<type>1</type>
+			<locationURI>PARENT-6-PROJECT_LOC/devices/MK82F25615/drivers/fsl_lptmr.h</locationURI>
+		</link>
+		<link>
 			<name>drivers/fsl_lpuart.c</name>
 			<type>1</type>
 			<locationURI>PARENT-6-PROJECT_LOC/devices/MK82F25615/drivers/fsl_lpuart.c</locationURI>
@@ -239,6 +249,16 @@
 			<name>sources/ov7670</name>
 			<type>2</type>
 			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>sources/parkingasst.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/parkingasst.c</locationURI>
+		</link>
+		<link>
+			<name>sources/parkingasst.h</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/parkingasst.h</locationURI>
 		</link>
 		<link>
 			<name>sources/usb_device_ch9.c</name>

@@ -12,6 +12,7 @@ C_SRCS += \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_flexio_camera.c \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_gpio.c \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_i2c.c \
+/Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_lptmr.c \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_lpuart.c \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_mpu.c \
 /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_sim.c \
@@ -26,6 +27,7 @@ OBJS += \
 ./drivers/fsl_flexio_camera.o \
 ./drivers/fsl_gpio.o \
 ./drivers/fsl_i2c.o \
+./drivers/fsl_lptmr.o \
 ./drivers/fsl_lpuart.o \
 ./drivers/fsl_mpu.o \
 ./drivers/fsl_sim.o \
@@ -40,6 +42,7 @@ C_DEPS += \
 ./drivers/fsl_flexio_camera.d \
 ./drivers/fsl_gpio.d \
 ./drivers/fsl_i2c.d \
+./drivers/fsl_lptmr.d \
 ./drivers/fsl_lpuart.d \
 ./drivers/fsl_mpu.d \
 ./drivers/fsl_sim.d \
@@ -97,6 +100,13 @@ drivers/fsl_gpio.o: /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.
 	@echo ' '
 
 drivers/fsl_i2c.o: /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_i2c.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: Cross ARM C Compiler'
+	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D_DEBUG=1 -DCPU_MK82FN256VDC15 -DUSB_STACK_BM -DFRDM_K82F -DFREEDOM -I../.. -I../../ov7670 -I../../../../../../../devices/MK82F25615/utilities -I../../../../../../../middleware/usb_1.0.0 -I../../../../../../../middleware/usb_1.0.0/osa -I../../../../../../../middleware/usb_1.0.0/include -I../../../../../../../middleware/usb_1.0.0/device -I../../../../../../../CMSIS/Include -I../../../../.. -I../../../../../../../devices/MK82F25615/drivers -I../../../../../../../devices/MK82F25615 -std=gnu99 -fno-common  -ffreestanding  -fno-builtin  -mapcs -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+drivers/fsl_lptmr.o: /Users/inakizi/Documents/Projects/NXPContest/Firmware/SDK_2.0_FRDM-K82F/devices/MK82F25615/drivers/fsl_lptmr.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross ARM C Compiler'
 	arm-none-eabi-gcc -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -O0 -fmessage-length=0 -fsigned-char -ffunction-sections -fdata-sections -Wall  -g -D_DEBUG=1 -DCPU_MK82FN256VDC15 -DUSB_STACK_BM -DFRDM_K82F -DFREEDOM -I../.. -I../../ov7670 -I../../../../../../../devices/MK82F25615/utilities -I../../../../../../../middleware/usb_1.0.0 -I../../../../../../../middleware/usb_1.0.0/osa -I../../../../../../../middleware/usb_1.0.0/include -I../../../../../../../middleware/usb_1.0.0/device -I../../../../../../../CMSIS/Include -I../../../../.. -I../../../../../../../devices/MK82F25615/drivers -I../../../../../../../devices/MK82F25615 -std=gnu99 -fno-common  -ffreestanding  -fno-builtin  -mapcs -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -c -o "$@" "$<"
