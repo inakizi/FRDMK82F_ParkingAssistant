@@ -36,6 +36,10 @@
 
 volatile uint32_t lptmrCounter = 0U;
 
+static uint8_t gPrevImage[19200];
+
+
+
 /*******************************************************************************
  * Code
  ******************************************************************************/
@@ -63,7 +67,7 @@ uint32_t timeElapsed(uint32_t lastTime)
 /*!
  * @brief Main function
  */
-int init(void)
+void init(void)
 {
     lptmr_config_t lptmrConfig;
     /* Define the init structure for the output pin*/
@@ -120,7 +124,7 @@ int init(void)
     PORT_SetPinConfig(PORTC, 12UL, &vsyncPinConfig);
 
 
-
+    initHistory();
 
 }
 
@@ -277,20 +281,6 @@ void sendWS2812Data(GPIO_Type *base, uint32_t pin,uint32_t *data,int length)
 
 void presetLED(void)
 {
-	static uint8_t toggle = 0;
-	static uint32_t LEDMask = 1<<12;
-	//GPIO_TogglePinsOutput(BOARD_LED_GPIO, 1u << BOARD_LED_GPIO_PIN);
-	//delay();
-	//GPIO_TogglePinsOutput(BOARD_LED_GPIO, 1u << BOARD_LED_GPIO_PIN);
-
-	//GPIO_TogglePinsOutput(GPIOB, 16U);
-
-
-	//send0(GPIOC, LEDMask);
-	//send1(GPIOC, LEDMask);
-	//send0(GPIOC, LEDMask);
-	//send1(GPIOC, LEDMask);
-
 
 	uint32_t data[3];
 
@@ -300,20 +290,6 @@ void presetLED(void)
 	sendWS2812Data(GPIOC, 12,data,3);
 
 
-
-	//GPIO_WritePinOutput(GPIOC, 12, 1);
-	//delayT0H();
-	//GPIO_WritePinOutput(GPIOC, 12, 0);
-	//delayT1H();
-	//GPIO_WritePinOutput(GPIOC, 12, 1);
-	//delay();
-	//GPIO_WritePinOutput(GPIOC, 12, 0);
-
-
-
-	//PRINTF("T");
-	//GPIO_WritePinOutput(GPIOC, 12, toggle);
-	//if (toggle==0) { toggle=1;} else {toggle=0;}
 
 }
 
@@ -364,9 +340,6 @@ void presetIndicatorLEDs(int left,int stop, int right)
 #define PARK_LIMIT_Y 30
 #define PARK_TOLERANCE_Y 20
 #define PARK_TOLERANCE_X 20
-
-
-
 
 
 // This is run everytime a new image is captured
@@ -454,6 +427,225 @@ void runParkingAssistant(volatile uint8_t *buffer)
 
 }
 
+
+struct coordinates
+{
+	int x;
+	int y;
+};
+
+struct coordinates posHistory[HISTORY_LENGTH];
+int posHistoryIndex;
+
+void initHistory(void)
+{
+	for (int i=0;i<HISTORY_LENGTH;i++)
+	{
+		posHistory[i].x = -1;
+		posHistory[i].y = -1;
+	}
+	posHistoryIndex = 0;
+}
+
+void addToHistory(int x, int y)
+{
+	posHistory[posHistoryIndex].x = x;
+	posHistory[posHistoryIndex].y = y;
+	posHistoryIndex++;
+	posHistoryIndex = posHistoryIndex % HISTORY_LENGTH;
+}
+
+int inRange(int x,int y)
+{
+	//int maxChange = 0;
+	int count = 0;
+	for (int i=0;i<HISTORY_LENGTH;i++)
+	{
+		if ((posHistory[i].x > -1) && (posHistory[i].y > -1))
+		{
+			if ((abs(posHistory[i].x-x)<MAX_SPEED) &&
+			    (abs(posHistory[i].y-y)<MAX_SPEED))
+			{
+				count++;
+			}
+		}
+	}
+
+	if (count>HISTORY_CHECK_SIZE) return 1;
+	return 0;
+}
+
+
+int drawHistory(volatile uint8_t *buffer)
+{
+	//int maxChange = 0;
+	int count = 0;
+	for (int i=0;i<HISTORY_LENGTH;i++)
+	{
+		if ((posHistory[i].x > -1) && (posHistory[i].y > -1))
+		{
+			paintLineXrgb(buffer,posHistory[i].x,0,0,31);
+			paintLineYrgb(buffer,posHistory[i].y,0,0,31);
+		}
+	}
+
+	if (count>HISTORY_CHECK_SIZE) return 1;
+	return 0;
+}
+
+
+// This is run everytime a new image is captured
+void runParkingAssistantUD(volatile uint8_t *buffer)
+{
+	static int state = 0;
+	static int lastxcor = 0;
+	static int lastycor = 0;
+
+
+
+	int xcor,ycor;
+
+	int objectLocX,objectLocY;
+
+
+	//presetLED();
+
+	locateMovingObjectUD(buffer,0,&xcor,&ycor);
+	convert2RGBandSavePrevious(buffer);
+
+
+	//shadowSquare(buffer,PARK_LIMIT_X, PARK_LIMIT_Y, PARK_TOLERANCE_X, IMAGE_Y_SIZE - PARK_LIMIT_Y, 5, 5, 0);
+
+	shadowSquare(buffer,PARK_UD_LIMIT_X, PARK_UD_LIMIT_Y-PARK_UD_TOLERANCE_Y, IMAGE_X_SIZE - PARK_UD_LIMIT_X, PARK_UD_TOLERANCE_Y, 5, 5, 0);
+
+	/*
+	if (xcor>0) {
+		objectLocX = xcor;
+		paintLineX(buffer,objectLocX);
+	} else {
+		objectLocX = lastxcor;
+	}
+
+	if (ycor>0) {
+		objectLocY = ycor;
+		paintLineY(buffer,objectLocY);
+	} else {
+		objectLocY = lastycor;
+	}
+*/
+
+	if (xcor>0) {
+		//objectLocX = xcor;
+		paintLineX(buffer,xcor);
+	} else {
+		//objectLocX = lastxcor;
+	}
+
+	if (ycor>0) {
+		//objectLocY = ycor;
+		paintLineY(buffer,ycor);
+	} else {
+		//objectLocY = lastycor;
+	}
+
+	drawHistory(buffer);
+
+	if ((xcor>0)&(ycor>0)) { // If movement has been detected
+		if (inRange(xcor,ycor)) {
+			paintLineXrgb(buffer,xcor,0,63,0);
+			paintLineYrgb(buffer,ycor,0,63,0);
+			objectLocX = xcor;
+			objectLocY = ycor;
+		} else {
+			objectLocX = lastxcor;
+			objectLocY = lastycor;
+		}
+		addToHistory(xcor, ycor);
+	} else {
+		objectLocX = lastxcor;
+		objectLocY = lastycor;
+	}
+
+
+
+	int leftSign = 0;
+	int rightSign = 0;
+	int stopLight = 0;
+
+	static int movementCount = 0;
+
+	switch (state) {
+	case STATE_IDLE: // Detect Car coming in
+		// Detect object moving in
+		/*
+		if ((lastxcor - objectLocX)>0) {
+			movementCount+=2;
+			PRINTF("+movementCount: %d\r\n",movementCount);
+			if (movementCount>5)
+			{
+				state = STATE_START_MOVEMENT;
+			}
+		} else {
+			movementCount--;
+			if (movementCount<0) movementCount = 0;
+			PRINTF("-movementCount: %d\r\n",movementCount);
+		}*/
+		//stopLight = 1;
+		state = STATE_START_MOVEMENT;
+
+		break;
+	case STATE_START_MOVEMENT:
+		/*
+		if (((lastxcor - objectLocX)>0) &&(lastycor - objectLocY)>0) {
+			movementCount+=5;
+			if (movementCount>60) movementCount=60;
+		} else {
+			movementCount--;
+			if (movementCount<0)
+			{
+				movementCount = 0;
+				state = STATE_IDLE;
+			}
+		}
+*/
+		if (objectLocY>PARK_UD_LIMIT_Y) {
+			rightSign = 1;
+		}
+		if (objectLocY<(PARK_UD_LIMIT_Y-PARK_UD_TOLERANCE_Y)) {
+			leftSign = 1;
+		}
+		stopLight = 1;
+		if (objectLocX<(PARK_UD_LIMIT_X+PARK_UD_TOLERANCE_X)) {
+			stopLight = 2;
+		}
+		if (objectLocX<PARK_UD_LIMIT_X) {
+			stopLight = 3;
+		}
+		PRINTF("Loc: %d,%d xcor,ycor: %d,%d\r\n",objectLocX,objectLocY,xcor,ycor);
+
+
+		//void paintSymbols(volatile uint8_t *buffer,int left,int stop,int right,int state)
+
+		break;
+
+	default:;
+
+
+
+	}
+
+	paintSymbols(buffer,leftSign,stopLight,rightSign,state);
+	presetIndicatorLEDs(leftSign,stopLight, rightSign);
+
+	lastxcor = objectLocX;
+	lastycor = objectLocY;
+
+
+}
+
+
+
+
 int run(void)
 {
 	static uint32_t lastTime = 0; //getTimer();
@@ -473,29 +665,35 @@ int run(void)
 
 
 
-#define MIN_IMAGE_X_START 5
-#define MIN_IMAGE_Y_START 5
-
-// This flag indicates if processed images are modified to show processing
-#define MODIFY_IMAGE
-// Change in image pixel to consider movement - for noise filtering
-#define MOVEMENT_THRESHOLD 10
-// Size of kernel for pixel belonging to object detection
-#define OBJECT_KERNEL_SIZE 2
-
-// Size of image
-#define IMAGE_X_SIZE 160
-#define IMAGE_Y_SIZE 120
-
-#define IMAGE_BUFFER_SIZE IMAGE_X_SIZE * IMAGE_Y_SIZE * 2
-
-static uint8_t gPrevImage[19200];
 
 
 
+int kernelMoved(volatile uint8_t *buffer,int x, int y)
+{
+	int index = 0;
+	int prevIndex = 0;
+	int sub;
 
+	int xs,ys;
+	int numChanges = 0;
 
+	for (xs=x;xs<x+OBJECT_KERNEL_SIZE;xs++)
+	{
+		for (ys=y;ys>y-OBJECT_KERNEL_SIZE;ys--)
+		{
+			prevIndex = (y*IMAGE_X_SIZE + x);
+			index = (prevIndex<<1) +1;
+			sub = buffer[index] - gPrevImage[prevIndex];
+			if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
+			{
+				numChanges++;
+			}
 
+		}
+	}
+	if (numChanges == OBJECT_KERNEL_SIZE*OBJECT_KERNEL_SIZE) return 1;
+	return 0;
+}
 
 // Function that locates a moving object in the camera frame
 // Inputs:
@@ -506,22 +704,14 @@ static uint8_t gPrevImage[19200];
 //    ycor: y coordinate of moving object if -1 means not changed or unabled to retrieve
 void locateMovingObjectUD(volatile uint8_t *buffer,int direction,int *pxcor,int *pycor)
 {
-	int index = 0;
-	int prevIndex = 0;
 	*pxcor = -1;
 	*pycor = -1;
 	int x,y;
-	int sub;
-
 	for (x=MIN_IMAGE_X_START;x<(IMAGE_X_SIZE - OBJECT_KERNEL_SIZE);x++)
 	{
-		for(y=MIN_IMAGE_Y_START;y<(IMAGE_Y_SIZE - OBJECT_KERNEL_SIZE);y++)
+		for (y=(IMAGE_Y_SIZE-MIN_IMAGE_Y_START); y > OBJECT_KERNEL_SIZE;y--)
 		{
-			prevIndex = (y*IMAGE_X_SIZE + x);
-			index = (prevIndex<<1) +1;
-			sub = buffer[index] - gPrevImage[prevIndex];
-			if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
-			{
+			if (kernelMoved(buffer,x,y)) {
 				*pxcor = x;
 				break;
 			}
@@ -529,24 +719,17 @@ void locateMovingObjectUD(volatile uint8_t *buffer,int direction,int *pxcor,int 
 		if (*pxcor > -1) break;
 	}
 
-	for(y=MIN_IMAGE_Y_START;y<(IMAGE_Y_SIZE - OBJECT_KERNEL_SIZE);y++)
+	for(y=(IMAGE_Y_SIZE-MIN_IMAGE_Y_START);y>OBJECT_KERNEL_SIZE;y--)
 	{
 		for (x=MIN_IMAGE_X_START;x<(IMAGE_X_SIZE - OBJECT_KERNEL_SIZE);x++)
 		{
-			prevIndex = (y*IMAGE_X_SIZE + x);
-			index = (prevIndex<<1)+1;
-			sub = buffer[index] - gPrevImage[prevIndex];
-			if ((sub>MOVEMENT_THRESHOLD)||(sub<-MOVEMENT_THRESHOLD))
-			{
+			if (kernelMoved(buffer,x,y)) {
 				*pycor = y;
 				break;
 			}
 		}
 		if (*pycor > -1) break;
 	}
-
-
-	//convert2RGBandSavePrevious(buffer);
 }
 
 
@@ -706,6 +889,38 @@ void paintHArrow(volatile uint8_t *buffer,int startx, int starty, int width, int
 }
 
 
+void paintVArrow(volatile uint8_t *buffer,int startx, int starty, int width, int height, uint8_t r, uint8_t g, uint8_t b)
+{
+	int x,y;
+	float xc=(float)height/(float)width; //y change
+	float ystep = 0;
+	if (width>0) {
+		for (y=starty;y<starty+width;y++)
+		{
+			int xt = (ystep++)*xc;
+			for (x=startx+xt;x<startx+height-xt;x++)
+			{
+				paintXY(buffer,x,y,r,g,b);
+			}
+		}
+	} else {
+		for (y=starty;y>starty+width;y--)
+		{
+			int xt = -(ystep++)*xc;
+			for (x=startx+xt;x<startx+height-xt;x++)
+			{
+				paintXY(buffer,x,y,r,g,b);
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
 
 
 void shadowSquare(volatile uint8_t *buffer,int startx, int starty, int width, int height, uint8_t r, uint8_t g, uint8_t b)
@@ -725,24 +940,24 @@ void shadowSquare(volatile uint8_t *buffer,int startx, int starty, int width, in
 void paintSymbols(volatile uint8_t *buffer,int left,int stop,int right,int state)
 {
 	if (left) {
-		paintHArrow(buffer,60,90,-10,8,0,63,0);
+		paintVArrow(buffer,140,40,-10,8,0,63,0);
 	}
 
 
 	if (stop==1) {
-		paintSquare(buffer,80,90,8,8,0,63,0);
+		paintSquare(buffer,140,60,8,8,0,63,0);
 	}
 	if (stop==2) {
-		paintSquare(buffer,80,90,8,8,31,63,0);
+		paintSquare(buffer,140,60,8,8,31,63,0);
 	}
 	if (stop==3) {
-		paintSquare(buffer,80,90,8,8,31,0,0);
+		paintSquare(buffer,140,60,8,8,31,0,0);
 	}
 
 
 
 	if (right) {
-		paintHArrow(buffer,100,90,10,8,0,63,0);
+		paintVArrow(buffer,140,80,10,8,0,63,0);
 	}
 
 	int i,x;
@@ -763,7 +978,7 @@ void paintLineX(volatile uint8_t *buffer,int xcor)
 {
 	int i;
 	for (i=0;i<120;i++) {
-		paintXY(buffer,xcor,i,31,0,0);
+		//paintXY(buffer,xcor,i,31,0,0);
 		paintXY(buffer,xcor,i,31,0,0);
 	}
 }
@@ -772,8 +987,26 @@ void paintLineY(volatile uint8_t *buffer,int ycor)
 {
 	int i;
 	for (i=0;i<160;i++) {
+		//paintXY(buffer,i,ycor,31,0,0);
 		paintXY(buffer,i,ycor,31,0,0);
-		paintXY(buffer,i,ycor,31,0,0);
+	}
+}
+
+void paintLineXrgb(volatile uint8_t *buffer,int xcor,uint8_t r,uint8_t g,uint8_t b)
+{
+	int i;
+	for (i=0;i<120;i++) {
+		//paintXY(buffer,xcor,i,r,g,b);
+		paintXY(buffer,xcor,i,r,g,b);
+	}
+}
+
+void paintLineYrgb(volatile uint8_t *buffer,int ycor,uint8_t r,uint8_t g,uint8_t b)
+{
+	int i;
+	for (i=0;i<160;i++) {
+		//paintXY(buffer,i,ycor,r,g,b);
+		paintXY(buffer,i,ycor,r,g,b);
 	}
 }
 
